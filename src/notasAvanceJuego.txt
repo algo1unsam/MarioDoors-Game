@@ -1,0 +1,70 @@
+CONCEPTO DEL JUEGO
+Descripcion del juego:
+Los personajes empiezan en el nivel mas alto de la torre, donde cada nivel tiene una serie de puertas
+Estas llevan a que el personaje que entra en esta, aparezca en otra puerta (en el mismo nivel donde esta o inferior)
+El objetivo del juego es ser el personaje que llegue primero a la puerta inferior (dorada)
+
+INTRO O MENU INICIAL
+Implementar con metodo schedule(milliseconds, action)
+-Se pueda seleccionar dificultad de la partida
+-Se pueda acceder a la explicacion del juego
+-Se pueda iniciar partida
+
+TABLERO
+-Imagen fondo Puertas (cada puerta es una imagen, y se repiten por nivel)
+-Imegenes Mario y Luigi (4 direcciones)   
+
+
+PUERTAS
+Se crean de una clase, con los siguientes atributos
+-Posicion imagen
+-Posicion destino
+-Item oculto
+
+NIVELES DE PUERTAS
+Se construyen a partir de colecciones de puertas, conociendo la dificultad de la partida, se sabe la cantidad de puertas por nivel
+Se tiene que tener al menos una puerta que lleve al nivel inferior, y una que sea la posicion de destino de alguna puerta del nivel superior
+Implementar la aparacion de items ramdom en las puertas
+
+PERSONAJES
+Se crean de una clase, con los siguientes atributos
+-Lista items
+-Velocidad *Los personajes de mueven de posicion por default a 2 celdas
+
+El personaje solo se puede mover horizontalmente (teclas: left, right, a, d) -> Imagenes de lado
+Entrar a las puertas (teclas: w, up ) -> Imagenes de espalda
+Aparecen en puerta destino -> Imagen de frente
+Aplicar item *el primero en la lista (teclas: space o v, ctrl o 0) 
+Agregar condicion que limite el uso del item, que no se pueda aplicar otro mientras otro este en efecto
+
+DIFICULTAD PARTIDAS
+1.Puertas por nivel (6)
+2.Puertas por nivel (10/12)
+3.Puertas por nivel (16/18)
+*Acelerar la musica de fondo segun el nivel de dificultad
+
+ITEMS
+Hacer que cada personaje tenga una coleccion de objetos, que consiga aleatoriamente al inicio de la partida
+(se podria modfificar un on/off de esta funcionalidad)
+Hay puertas con items ocultos, que el personaje al cruzarla por primera vez, se agrega este item a su colecion
+La coleccion de items del personaje aparace de un costado durante toda la partida
+Seria una lista donde cada posicion (o celda) muestre la imagen asociada
+del item que tiene el personaje, y al usarlo desaparece de la visualizacion
+Items son usados dandole ventaja al personaje que lo posee
+
+Items pensados:
+-Hacer que vaya mas lento el oponente (hacer que la posicion cambie de a 1 celda -> cambio de velocidad)
+-Hacer que vaya mas rapido el personaje (hacer que la posicion cambie de a 3 celda -> cambio de velocidad)
+-Cambio de direccion de las teclas del oponente por x segundos (metodo onTick - implementar con un on/off en la direccion de las teclas)
+-Cambiar color de la puerta que lleva al piso inferior
+-Hacer que el oponente se detenga por x segundos (hacer que la posicion cambie de a 0 celda -> cambio de velocidad) (metodo onTick - implementar con un on/off en la direccion de las teclas)
+
+DIVISION TAREAS
+03/05
+Paola
+-Cambio imagen personajes, por direccion de movimiento
+-Creacion puerta (imagen cuadrado) y probar que el personaje entre y salga a otra puerta
+Nico
+-Creacion plataformas (niveles) y que el personaje camine sobre la plataforma
+
+

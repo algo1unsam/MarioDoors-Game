@@ -1,0 +1,30 @@
+import wollok.game.*
+import personajes.*
+
+program donkeyKong {
+	
+	//CONFIGURACION TABLERO
+	game.width(10)
+	game.height(10)
+	game.cellSize(30)
+	
+	//AGREGANDO PERSONAJES AL TABLERO
+	game.addVisual(mario)
+	game.addVisual(donkeyKong)
+	
+	//CONFIGURACION TECLAS
+	//Teclas Arriba
+	keyboard.w().onPressDo{ mario.moverArriba() }
+	keyboard.up().onPressDo{ donkeyKong.moverArriba() }
+	//Teclas Abajo
+	keyboard.s().onPressDo{ mario.moverAbajo() }
+	keyboard.down().onPressDo{ donkeyKong.moverAbajo() }
+	//Tecla Izquierda
+	keyboard.a().onPressDo{ mario.moverIzquierda() }
+	keyboard.left().onPressDo{ donkeyKong.moverIzquierda() }
+	//Tecla Derecha
+	keyboard.d().onPressDo{ mario.moverDerecha() }
+	keyboard.right().onPressDo{ donkeyKong.moverDerecha() }
+	
+	game.start()
+}
