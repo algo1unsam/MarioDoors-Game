@@ -29,7 +29,7 @@ object mario {
 object luigi {
 	var property position = game.center()
 	const property image = "player.png"
-	
+
 	method moverIzq(){
 		if (hayAlgoIzq.verificacion(self).isEmpty()){
 			position = position.left(1)
