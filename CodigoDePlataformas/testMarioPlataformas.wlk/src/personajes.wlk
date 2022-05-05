@@ -2,7 +2,7 @@ import wollok.game.*
 
 object mario {
 	var property position = game.center()
-	const property image = "player.png"
+	const property image = "./assets/jugador1.png"
 	
 	method moverIzq(){
 		if (hayAlgoIzq.verificacion(self).isEmpty()){
@@ -28,7 +28,7 @@ object mario {
 
 object luigi {
 	var property position = game.center()
-	const property image = "player.png"
+	const property image = "./assets/jugador2.png"
 
 	method moverIzq(){
 		if (hayAlgoIzq.verificacion(self).isEmpty()){
