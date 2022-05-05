@@ -64,7 +64,7 @@ ENFOQUE
 2.Implementacion Imagenes Finales (escenario, personaje, plataforma, puertas, etc)
 
 Imagenes para la implementacion de la logica
--Personajes -> hector.png
+-Personajes -> jugador1.png, juegador2.png
 -Plataforma -> muro.png
 -Puerta -> caja.png
 
