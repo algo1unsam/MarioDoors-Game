@@ -87,7 +87,7 @@ TAREAS
 4.Objeto escenario (en un archivo .wlk):
   --Con metodos y atributos que seteen los escenarios (menu inicial, tablero partida, etc)
 5.Objetos items:
-	5.1Crear los items a partir de Factory method para que aparezcan en el tablero
+  5.1Crear los items a partir de Factory method para que aparezcan en el tablero
  
 DIVISION TAREAS
 05/05
