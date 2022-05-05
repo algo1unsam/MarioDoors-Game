@@ -1,5 +1,4 @@
 CONCEPTO DEL JUEGO
-Descripcion del juego:
 Los personajes empiezan en el nivel mas alto de la torre, donde cada nivel tiene una serie de puertas
 Estas llevan a que el personaje que entra en esta, aparezca en otra puerta (en el mismo nivel donde esta o inferior)
 El objetivo del juego es ser el personaje que llegue primero a la puerta inferior (dorada)
@@ -12,8 +11,7 @@ Implementar con metodo schedule(milliseconds, action)
 
 TABLERO
 -Imagen fondo Puertas (cada puerta es una imagen, y se repiten por nivel)
--Imegenes Mario y Luigi (4 direcciones)   
-
+-Imegenes Mario y Luigi (4 direcciones)
 
 PUERTAS
 Se crean de una clase, con los siguientes atributos
