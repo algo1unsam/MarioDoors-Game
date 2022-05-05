@@ -21,11 +21,11 @@ class Personaje{
 	}
 }
 
-object mario inherits Personaje(image = "./assets/jugador1.png", position = game.at(0,0)) {
+object mario inherits Personaje(image = "jugador1.png", position = game.at(0,0)) {
 
 }
 
-object donkeyKong inherits Personaje(image = "./assets/jugador2.png", position = game.at(9,0)) {
+object donkeyKong inherits Personaje(image = "jugador2.png", position = game.at(9,0)) {
 
 }
 
