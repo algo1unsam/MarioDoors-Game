@@ -59,12 +59,40 @@ Items pensados:
 -Cambiar color de la puerta que lleva al piso inferior
 -Hacer que el oponente se detenga por x segundos (hacer que la posicion cambie de a 0 celda -> cambio de velocidad) (metodo onTick - implementar con un on/off en la direccion de las teclas)
 
+ENFOQUE
+1.Implementacion Logica
+2.Implementacion Imagenes Finales (escenario, personaje, plataforma, puertas, etc)
+
+Imagenes para la implementacion de la logica
+-Personajes -> hector.png
+-Plataforma -> muro.png
+-Puerta -> caja.png
+
+TAREAS
+1.Movimiento personajes:
+  1.1.Crear objetos de direccion (derecha, izquierda) , con el metodo que cambie la posicion del personaje, .left(celda), right(cenda)
+  *celda seria la 'velocidad' con que se mueve el personaje
+  *Estos objetos se usarian al configurar las teclas de movimiento -> ejemplo: keyboard.a().onPressDo{ personaje.mover(izquierda) }
+  1.2.Agregar un llamado a validar si el personaje se puede mover mas alla de la plataforma del nivel donde estan (punto 2.1)
+  1.3.Cambio imagen personajes segun direccion de su movimiento (derecha, izquierda, frente (saliendo puerta), atras (entrando puerta))
+  1.4.Entrada/Salida de las puertas
+2.Objeto plataforma:
+  2.1.Crear plataforma como objeto
+    --Atributo ladrillos, siendo una lista que indica el largo de la plataforma
+    Se construye con una concatenacion de objetos ladrillo (con imagen muro)
+    --Metodo para la validacion limite del tablero para que los personajes no se desplacen mas alla de la plataforma del nivel donde estan
+3.Objeto puertas:
+    --Atributo direccion de destino
+    --Metodo que el personaje al entrar, aparezca en otra puerta segun direccion de destino
+4.Objeto escenario (en un archivo .wlk):
+  --Con metodos y atributos que seteen los escenarios (menu inicial, tablero partida, etc)
+ 
 DIVISION TAREAS
-03/05
+05/05
 Paola
--Cambio imagen personajes, por direccion de movimiento
--Creacion puerta (imagen cuadrado) y probar que el personaje entre y salga a otra puerta
+Tarea#1
+Tarea#3
 Nico
--Creacion plataformas (niveles) y que el personaje camine sobre la plataforma
+Tarea#2
 
 
