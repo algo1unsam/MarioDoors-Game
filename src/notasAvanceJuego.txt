@@ -93,7 +93,7 @@ TAREAS NUEVAS:
     Por ejemplo: una pocion que te haga caminar mas rapido, mas lento, que ayude cual es la puerta ,etc,etc,etc
 2. Realizar una lista de puertas por cada fila en la cual una de ellas va a hacer que se pueda bajar de piso
 3. Hacer la division de las imagenes para ya trabajar con los materiales a presentar en el trabajo (31/5: Mostrar avance de los juegos), hay tiempo para realizarlo
-
+4. Hacer que aparezca un fondo y que luego de cierto tiempo se pueda jugar sin problema.
  
 DIVISION TAREAS
 05/05
@@ -113,3 +113,4 @@ Paola
 Tarea #2
 Nico 
 Tarea #1
+Tarea #4
