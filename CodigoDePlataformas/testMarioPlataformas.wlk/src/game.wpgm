@@ -1,25 +1,36 @@
 import personajes.*
 import wollok.game.*
 import objects.*
+import escenarios.*
 
 program abc {
 	//  CONFIG	
 	game.title("TestPlataformas")
-	game.height(10)
-	game.width(10)
-	//game.ground("ground.png")
-	
-	
+	game.height(30)
+	game.width(30)
+	game.cellSize(30)
+
+	/*game.boardGround("buenas2.jpg")
+	game.schedule(6000,{game.boardGround("ImagenPresentacion.jpg")})
+	game.schedule(9000,{fondo.seteoDelFondo()}) //"fondo_Setteo" */
+	/*No pude hacer que aparezca una imagen y luego de X tiempo aparezca el fondo para poder
+	jugar*/
+	game.schedule(10000,{escenario.primero()}) //"juego"
+	game.schedule(11000, {personajes.mario()}) //"personaje mario"
+	game.schedule(11000,{personajes.luigi()}) //"personaje Luigi
 	
 	// 	VISUAL ESCENARIO
-	game.addVisual(new Plataforma(position = game.at(1,7)))
+	//escenario.presentacion()
+	//escenario.primero()
+	
+	/*game.addVisual(new Plataforma(position = game.at(1,7)))
 	game.addVisual(new Plataforma(position = game.at(2,7)))
 	game.addVisual(new Plataforma(position = game.at(3,7)))
 	game.addVisual(new Plataforma(position = game.at(4,7)))
 	game.addVisual(new Plataforma(position = game.at(5,7)))
 	game.addVisual(new Plataforma(position = game.at(6,7)))
 	game.addVisual(new Plataforma(position = game.at(7,7)))
-	game.addVisual(new Plataforma(position = game.at(8,7)))
+	game.addVisual(new Plataforma(position = game.at(8,7)))*/
 	
 	
 	
@@ -38,9 +49,7 @@ program abc {
 	
 	keyboard.e().onPressDo{game.stop()}
 	
-	//	VISUAL PERSONAJE
-	game.addVisual(mario)
-	game.addVisual(luigi)
+	
 	
 	//START
 	game.start()
