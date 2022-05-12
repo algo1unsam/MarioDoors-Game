@@ -4,7 +4,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: GR2Game
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: GR2Game; singleton:=true
+Bundle-SymbolicName: MarioDoors-Game;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.ibm.icu,
  org.eclipse.xtext,

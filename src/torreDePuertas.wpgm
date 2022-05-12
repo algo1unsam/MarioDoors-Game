@@ -1,30 +1,37 @@
 import wollok.game.*
 import personajes.*
+import direccionesMovimiento.*
+import puertas.*
 
 program donkeyKong {
-	
-	//CONFIGURACION TABLERO
+	// CONFIGURACION TABLERO
 	game.width(10)
 	game.height(10)
-	game.cellSize(30)
-	
-	//AGREGANDO PERSONAJES AL TABLERO
+	game.cellSize(50)
+	// AGREGANDO PUERTAS AL TABLERO
+	var puertaA = new Puerta(position=game.at(4,5), positionDestino=game.at(6,5))
+	var puertaB = new Puerta(position=game.at(6,5), positionDestino=game.at(4,5))
+	game.addVisual(puertaA)
+	game.addVisual(puertaB)
+	// AGREGANDO PERSONAJES AL TABLERO
 	game.addVisual(mario)
-	game.addVisual(donkeyKong)
-	
-	//CONFIGURACION TECLAS
-	//Teclas Arriba
-	keyboard.w().onPressDo{ mario.moverArriba() }
-	keyboard.up().onPressDo{ donkeyKong.moverArriba() }
-	//Teclas Abajo
-	keyboard.s().onPressDo{ mario.moverAbajo() }
-	keyboard.down().onPressDo{ donkeyKong.moverAbajo() }
-	//Tecla Izquierda
-	keyboard.a().onPressDo{ mario.moverIzquierda() }
-	keyboard.left().onPressDo{ donkeyKong.moverIzquierda() }
-	//Tecla Derecha
-	keyboard.d().onPressDo{ mario.moverDerecha() }
-	keyboard.right().onPressDo{ donkeyKong.moverDerecha() }
+	game.addVisual(luigi)
+	// CONFIGURACION TECLAS
+		// Teclas Arriba
+	keyboard.w().onPressDo{ mario.mover(arriba) }
+	keyboard.up().onPressDo{ luigi.mover(arriba) }
+		// Teclas Abajo
+	keyboard.s().onPressDo{ mario.mover(abajo) }
+	keyboard.down().onPressDo{ luigi.mover(abajo) }
+		// Teclas Izquierda
+	keyboard.a().onPressDo{ mario.mover(izquierda) }
+	keyboard.left().onPressDo{ luigi.mover(izquierda) }
+		// Teclas Derecha
+	keyboard.d().onPressDo{ mario.mover(derecha) }
+	keyboard.right().onPressDo{ luigi.mover(derecha) }
+		// Teclas Entrar Puerta (prueba)
+	keyboard.e().onPressDo{ mario.entrarPuerta() }
+	keyboard.shift().onPressDo{ luigi.entrarPuerta() }
 	
 	game.start()
 }

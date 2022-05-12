@@ -68,7 +68,7 @@ Imagenes para la implementacion de la logica
 
 TAREAS
 1.Movimiento personajes:
-  1.1.Crear objetos de direccion (derecha, izquierda) , con el metodo que cambie la posicion del personaje, .left(celda), right(cenda)
+  1.1.Crear objetos de direccion (derecha, izquierda) , con el metodo que cambie la posicion del personaje, .left(celda), right(celda)
   *celda seria la 'velocidad' con que se mueve el personaje
   *Estos objetos se usarian al configurar las teclas de movimiento -> ejemplo: keyboard.a().onPressDo{ personaje.mover(izquierda) }
   1.2.Agregar un llamado a validar si el personaje se puede mover mas alla de la plataforma del nivel donde estan (punto 2.1)
@@ -90,8 +90,10 @@ TAREAS
 DIVISION TAREAS
 05/05
 Paola
-Tarea#1
-Tarea#3
+Tarea#1 --listo
+Tarea#3 --listo
+Aparicion lista de puertas en el tablero, con direccion destino aleatoria hacia otra puerta
+Hacer que los personajes solo se muevan horizontalemente, una vez se agreguen los niveles de puertas
 Nico
 Tarea#2
 
