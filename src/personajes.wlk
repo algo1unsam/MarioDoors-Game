@@ -1,31 +1,33 @@
 import wollok.game.*
+import direccionesMovimiento.*
 
-class Personaje{
+class Personaje {
+
 	const property image
-	var property position = game.at(0,0)
-	
-	method moverArriba(){
-		position = self.position().up(1)
-	}
-	
-	method moverAbajo(){
-		position = self.position().down(1)
-	}
-	
-	method moverIzquierda(){
-		position = self.position().left(1)
-	}
-	
-	method moverDerecha(){
-		position = self.position().right(1)
-	}
-}
+	var property position = game.at(0, 0)
+	var property velocidad = 1
 
-object mario inherits Personaje(image = "./assets/jugador1.png", position = game.at(0,0)) {
+	method mover(direccion) {
+		const positionSiguiente = direccion.siguiente(position, velocidad)
+		position = positionSiguiente
+	}
+
+	method entrarPuerta() {
+		const objetosMismaPosicion = self.position().allElements()
+		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
+			self.error("No hay puerta para entrar")
+		}
+		const puerta = objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
+		puerta.trasladar(self)
+	}
 
 }
 
-object donkeyKong inherits Personaje(image = "./assets/jugador2.png", position = game.at(9,0)) {
+object mario inherits Personaje(image = "jugador1.png", position = game.at(0, 0)) {
+
+}
+
+object luigi inherits Personaje(image = "jugador2.png", position = game.at(9, 0)) {
 
 }
 

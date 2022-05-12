@@ -1,5 +1,4 @@
 CONCEPTO DEL JUEGO
-Descripcion del juego:
 Los personajes empiezan en el nivel mas alto de la torre, donde cada nivel tiene una serie de puertas
 Estas llevan a que el personaje que entra en esta, aparezca en otra puerta (en el mismo nivel donde esta o inferior)
 El objetivo del juego es ser el personaje que llegue primero a la puerta inferior (dorada)
@@ -12,8 +11,7 @@ Implementar con metodo schedule(milliseconds, action)
 
 TABLERO
 -Imagen fondo Puertas (cada puerta es una imagen, y se repiten por nivel)
--Imegenes Mario y Luigi (4 direcciones)   
-
+-Imegenes Mario y Luigi (4 direcciones)
 
 PUERTAS
 Se crean de una clase, con los siguientes atributos
@@ -70,7 +68,7 @@ Imagenes para la implementacion de la logica
 
 TAREAS
 1.Movimiento personajes:
-  1.1.Crear objetos de direccion (derecha, izquierda) , con el metodo que cambie la posicion del personaje, .left(celda), right(cenda)
+  1.1.Crear objetos de direccion (derecha, izquierda) , con el metodo que cambie la posicion del personaje, .left(celda), right(celda)
   *celda seria la 'velocidad' con que se mueve el personaje
   *Estos objetos se usarian al configurar las teclas de movimiento -> ejemplo: keyboard.a().onPressDo{ personaje.mover(izquierda) }
   1.2.Agregar un llamado a validar si el personaje se puede mover mas alla de la plataforma del nivel donde estan (punto 2.1)
@@ -86,6 +84,8 @@ TAREAS
     --Metodo que el personaje al entrar, aparezca en otra puerta segun direccion de destino
 4.Objeto escenario (en un archivo .wlk):
   --Con metodos y atributos que seteen los escenarios (menu inicial, tablero partida, etc)
+5.Objetos items:
+  5.1Crear los items a partir de Factory method para que aparezcan en el tablero
  
  
 TAREAS NUEVAS:
@@ -98,8 +98,10 @@ TAREAS NUEVAS:
 DIVISION TAREAS
 05/05
 Paola
-Tarea#1
-Tarea#3
+Tarea#1 --listo
+Tarea#3 --listo
+Aparicion lista de puertas en el tablero, con direccion destino aleatoria hacia otra puerta
+Hacer que los personajes solo se muevan horizontalemente, una vez se agreguen los niveles de puertas
 Nico
 Tarea#2
 	[UPDATE]: Realice el 2.1 en donde los jugadores no tienen el problema con los bordes del tablero.
