@@ -2,21 +2,6 @@ import wollok.game.*
 import objects.*
 import personajes.*
 
-object personajes{
-	method mario(){
-		game.addVisual(mario)
-	}
-	method luigi(){
-		game.addVisual(luigi)
-		
-	}
-}
-
-object fondo {
-	method seteoDelFondo(){
-		game.boardGround("caja.png")
-	}
-}
 object escenario {
 	
 	method primero(){
