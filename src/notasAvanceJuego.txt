@@ -87,6 +87,14 @@ TAREAS
 5.Objetos items:
   5.1Crear los items a partir de Factory method para que aparezcan en el tablero
  
+ 
+TAREAS NUEVAS:
+1. Pensar la implemtacion de los objetos que van a estar en el juego que van a modificar valores de los personajes
+    Por ejemplo: una pocion que te haga caminar mas rapido, mas lento, que ayude cual es la puerta ,etc,etc,etc
+2. Realizar una lista de puertas por cada fila en la cual una de ellas va a hacer que se pueda bajar de piso
+3. Hacer la division de las imagenes para ya trabajar con los materiales a presentar en el trabajo (31/5: Mostrar avance de los juegos), hay tiempo para realizarlo
+4. Hacer que aparezca un fondo y que luego de cierto tiempo se pueda jugar sin problema.
+ 
 DIVISION TAREAS
 05/05
 Paola
@@ -96,5 +104,15 @@ Aparicion lista de puertas en el tablero, con direccion destino aleatoria hacia 
 Hacer que los personajes solo se muevan horizontalemente, una vez se agreguen los niveles de puertas
 Nico
 Tarea#2
+	[UPDATE]: Realice el 2.1 en donde los jugadores no tienen el problema con los bordes del tablero.
+	Tarea #4: Al menos el escenario BASE está hecho...
+	No pude hacer que aparezca una imagen de fondo y luego empiece el juego...
+	
 
-
+NUEVA DIVISION DE TAREAS:
+10/05
+Paola
+Tarea #2
+Nico 
+Tarea #1
+Tarea #4

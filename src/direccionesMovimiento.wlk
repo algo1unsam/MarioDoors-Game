@@ -1,6 +1,7 @@
 import wollok.game.*
 import personajes.*
 
+
 object arriba {
 
 	method siguiente(positionActual, velocidad) = positionActual.up(velocidad)
@@ -24,4 +25,5 @@ object derecha {
 	method siguiente(positionActual, velocidad) = positionActual.right(velocidad)
 
 }
+
 

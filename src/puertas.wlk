@@ -1,5 +1,5 @@
 import wollok.game.*
-import personajes.*
+import personajes2.*
 
 class Puerta{
 	

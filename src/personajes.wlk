@@ -1,5 +1,6 @@
 import wollok.game.*
 import direccionesMovimiento.*
+import validaciones.*
 
 class Personaje {
 
@@ -8,10 +9,17 @@ class Personaje {
 	var property velocidad = 1
 
 	method mover(direccion) {
-		const positionSiguiente = direccion.siguiente(position, velocidad)
-		position = positionSiguiente
+		const puedoMoverme = self.confirmacionDeMovimiento(direccion)
+		if (puedoMoverme == 1) {position = direccion.siguiente(position, velocidad)} else {}
+		
 	}
 
+	method confirmacionDeMovimiento(direccion){
+		const positionSiguiente = direccion.siguiente(position, velocidad)
+		return mundo.validacionProximaPosicion(positionSiguiente, self)
+		
+	}
+	
 	method entrarPuerta() {
 		const objetosMismaPosicion = self.position().allElements()
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
