@@ -35,7 +35,7 @@ object mario inherits Personaje(image = "jugador1.png", position = game.at(0, 0)
 
 }
 
-object luigi inherits Personaje(image = "jugador2.png", position = game.at(9, 0)) {
+object luigi inherits Personaje(image = "jugador2.png", position = game.at(15, 0)) {
 
 }
 

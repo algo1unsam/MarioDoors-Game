@@ -2,21 +2,26 @@ import wollok.game.*
 import personajes.*
 import direccionesMovimiento.*
 import puertas.*
+import plataformas.*
 
-program donkeyKong {
+program torreDePuertas {
 	// CONFIGURACION TABLERO
-	game.width(10)
+	game.width(15)
 	game.height(10)
 	game.cellSize(50)
-	// AGREGANDO PUERTAS AL TABLERO
-	var puertaA = new Puerta(position=game.at(4,5), positionDestino=game.at(6,5))
-	var puertaB = new Puerta(position=game.at(6,5), positionDestino=game.at(4,5))
-	game.addVisual(puertaA)
-	game.addVisual(puertaB)
-	// AGREGANDO PERSONAJES AL TABLERO
+		// AGREGANDO PUERTAS AL TABLERO
+//	var puertaA = new Puerta(position=game.at(4,5), positionDestino=game.at(6,5))
+//	var puertaB = new Puerta(position=game.at(6,5), positionDestino=game.at(4,5))
+//	game.addVisual(puertaA)
+//	game.addVisual(puertaB)
+//	var nivel = new NivelPuertas()
+//	nivel.construirPuertas()
+	var nivel = new NivelPlataforma(positionInicialPlataforma = game.at(1, 7))
+	nivel.agregarAlTablero()
+		// AGREGANDO PERSONAJES AL TABLERO
 	game.addVisual(mario)
 	game.addVisual(luigi)
-	// CONFIGURACION TECLAS
+		// CONFIGURACION TECLAS
 		// Teclas Arriba
 	keyboard.w().onPressDo{ mario.mover(arriba) }
 	keyboard.up().onPressDo{ luigi.mover(arriba) }
@@ -32,6 +37,5 @@ program donkeyKong {
 		// Teclas Entrar Puerta (prueba)
 	keyboard.e().onPressDo{ mario.entrarPuerta() }
 	keyboard.shift().onPressDo{ luigi.entrarPuerta() }
-	
 	game.start()
 }
