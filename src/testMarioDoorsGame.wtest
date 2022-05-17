@@ -7,6 +7,7 @@ import tablero.*
 import torreDePuertas.*
 import validaciones.*
 import wollok.game.*
+
 /*[Analisis de los TESTS]
  * 		Por ahora los test de izquierda y derecha reaccionan "bien"
  * 		En el caso de test para abajo, tira error ya que este configurada la tecla o no,
