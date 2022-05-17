@@ -1,0 +1,13 @@
+import wollok.game.*
+import tablero.*
+import teclado.*
+import configuracionesDificultad.*
+
+program MarioDoorsGame {
+	//var dificultad = new Dificultad(dificultad.)
+	tablero.crearDimensiones()
+	tablero.agregarTorreDePuertas()
+	tablero.agregarPersonajes()
+	teclado.configurarTeclas()
+	game.start()
+}
