@@ -5,9 +5,10 @@ import configuracionesDificultad.*
 
 program MarioDoorsGame {
 	//var dificultad = new Dificultad(dificultad.)
-	tablero.crearDimensiones()
-	tablero.agregarTorreDePuertas()
-	tablero.agregarPersonajes()
-	teclado.configurarTeclas()
+	//tablero.crearDimensiones()
+	//tablero.agregarTorreDePuertas()
+	//tablero.agregarPersonajes()
+	//teclado.configurarTeclas()
+	tablero.iniciar()
 	game.start()
 }
