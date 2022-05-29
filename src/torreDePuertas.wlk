@@ -27,7 +27,7 @@ class NivelPlataforma {
 	const property plataformas = []
 	const puertas = []
 	var positionInicialPlataforma
-	const cantidadPuertas = 6 // Consultar a configuracion dificultad
+	const cantidadPuertas = 7 // Consultar a configuracion dificultad
 	const cantidadPlataformas = cantidadPuertas * 2 + 1
 
 	method configurarPuertasPositionDestino() {
@@ -36,8 +36,8 @@ class NivelPlataforma {
 	}
 
 	method construirPuertas() {
-		const plataformasPositionXPar = plataformas.filter({ plataforma => plataforma.position().x().even() })
-		plataformasPositionXPar.forEach({ plataforma => puertas.add(new Puerta(position = plataforma.position().up(1)))})
+		const plataformasPositionXImpar = plataformas.filter({ plataforma => plataforma.position().x().odd() })
+		plataformasPositionXImpar.forEach({ plataforma => puertas.add(new Puerta(position = plataforma.position().up(1)))})
 		self.configurarPuertasPositionDestino()
 	}
 
@@ -60,7 +60,7 @@ object plataformaFactory {
 	var position
 
 	method positionInicial(_positionInicial) {
-		position = _positionInicial.left(1)
+		position = _positionInicial.left(2)
 	}
 
 	method positionXSiguiente() {
@@ -83,7 +83,7 @@ object nivelPlataformaFactory {
 	}
 
 	method positionYSiguiente() {
-		position = position.down(3)
+		position = position.down(4) //Espacio entre nivel plataformas
 	}
 
 	method construirNivelPlataforma() {
