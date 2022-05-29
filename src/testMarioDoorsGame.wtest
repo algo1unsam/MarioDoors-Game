@@ -1,0 +1,71 @@
+import configuracionesDificultad.*
+import direccionesMovimiento.*
+import escenarios.*
+import objects.*
+import personajes.*
+import tablero.*
+import torreDePuertas.*
+import validaciones.*
+import wollok.game.*
+
+/*[Analisis de los TESTS]
+ * 		Por ahora los test de izquierda y derecha reaccionan "bien"
+ * 		En el caso de test para abajo, tira error ya que este configurada la tecla o no,
+ * el personaje se mueve igual. 
+*/
+describe "Movilidad de Mario y que no atraviese la plataforma" {
+
+	method clearPantalla() {
+		game.clear()
+	}
+
+	// Los personajes spawnean en 1,3 y 14,3
+	test "Derecha" {
+		tablero.setearEntorno()
+		assert.equals(mario.position().x(), 1)
+		assert.equals(mario.position().y(), 3) // Depende del nivel de plataforma, no del eje Y "puro"
+		mario.mover(derecha)
+		assert.equals(mario.position().x(), 2)
+		assert.equals(mario.position().y(), 3)
+		self.clearPantalla()
+	}
+	
+	test "Izquierda" {
+		tablero.setearEntorno()
+		assert.equals(mario.position().x(), 1)
+		assert.equals(mario.position().y(), 3) // Depende del nivel de plataforma, no del eje Y "puro"
+		mario.mover(izquierda)
+		assert.equals(mario.position().x(), 0)
+		assert.equals(mario.position().y(), 3)
+		self.clearPantalla()
+	}
+}
+
+describe "Movilidad de Luigi y que no atraviese la plataforma" {
+	method clearPantalla() {
+		game.clear()
+	}
+	// Los personajes spawnean en 1,3 y 14,3.
+
+	test "Izquierda" {
+		tablero.setearEntorno()
+		assert.equals(luigi.position().x(), 13)
+		assert.equals(luigi.position().y(), 3) // Depende del nivel de plataforma, no del eje Y "puro"
+		//luigi.mover(izquierda)
+		//assert.equals(luigi.position().x(), 12)
+		//assert.equals(luigi.position().y(), 3)
+		self.clearPantalla()
+	}
+	test "Derecha" {
+		tablero.setearEntorno()
+		assert.equals(luigi.position().x(), 13)
+		assert.equals(luigi.position().y(), 3) // Depende del nivel de plataforma, no del eje Y "puro"
+		//luigi.mover(derecha)
+		//assert.equals(luigi.position().x(), 14)
+		//assert.equals(luigi.position().y(), 3)
+		self.clearPantalla()
+	}
+	
+}
+
+

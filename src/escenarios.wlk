@@ -18,4 +18,8 @@ object escenario {
 		game.addVisual(new Plataforma(position = game.at(primeraFila.last(),altura)))
 	}
 	
+	
 }
+
+
+
