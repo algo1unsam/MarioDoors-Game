@@ -1,49 +1,62 @@
 import wollok.game.*
 import torreDePuertas.*
-import direccionesMovimiento.*
+import direcciones.*
 import validaciones.*
-
 
 class Personaje {
 
-	const property image
-	var property position = self.positionInicial() //game.at(0, 0)
+	const imagePersonaje
+	var property position = self.positionInicial()
+	var property direccionMovimiento
 	var property velocidad = 1
-	
-	method positionInicial() = torreDePuertas.nivelesPlataformas().first().plataformas()
+
+	method image() = imagePersonaje + self.imageDireccion() + ".png"
+
+	method imageDireccion() = direccionMovimiento.toString()
+
+	method positionInicial() = self.plataformaInicial().position().up(1)
+
+	method nivelPlataformaInicial() = torreDePuertas.nivelesPlataformas().first().plataformas()
+
+	method plataformaInicial() = self.nivelPlataformaInicial().anyOne()
+
+	method validarPosition(positionSiguiente) {
+		mundo.validarPosition(positionSiguiente, self)
+	}
 
 	method mover(direccion) {
-		const puedoMoverme = self.confirmacionDeMovimiento(direccion)
-		if (puedoMoverme == 1) {position = direccion.siguiente(position, velocidad)} else {}
-		
+		const positionSiguiente = direccion.siguiente(position, velocidad)
+		self.validarPosition(positionSiguiente)
+		position = positionSiguiente
+		direccionMovimiento = direccion
 	}
 
-	method confirmacionDeMovimiento(direccion){
-		const positionSiguiente = direccion.siguiente(position, velocidad)
-		return mundo.validacionProximaPosicion(positionSiguiente, self)
-		
+	method salirPuerta() {
+		direccionMovimiento = frente
 	}
-	
+
 	method entrarPuerta() {
 		const objetosMismaPosicion = self.position().allElements()
 		objetosMismaPosicion.remove(self)
-		
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
 			self.error("No hay puerta para entrar")
 		}
 		const puerta = objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
 		puerta.trasladar(self)
+		self.salirPuerta()
 	}
+
 }
 
+object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha) {
 
-object mario inherits Personaje(image = "jugador1.png") {
-	
-	override method positionInicial() = super().first().position().up(1)
+	override method plataformaInicial() = self.nivelPlataformaInicial().first()
+
 }
 
-object luigi inherits Personaje(image = "jugador2.png") {
-	
-	override method positionInicial() = super().last().position().up(1)
+object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda) {
+
+	override method plataformaInicial() = self.nivelPlataformaInicial().last()
+
 }
 

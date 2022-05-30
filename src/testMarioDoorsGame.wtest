@@ -1,5 +1,5 @@
-import configuracionesDificultad.*
-import direccionesMovimiento.*
+import dificultades.*
+import direcciones.*
 import escenarios.*
 import objects.*
 import personajes.*
