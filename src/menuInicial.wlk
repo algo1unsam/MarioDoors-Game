@@ -5,8 +5,8 @@ import tablero.*
 
 object pressEnter {
 
-	const property position = game.at(0, game.height() / 2)
-	const property image = "press_enter.png"
+	const property position = game.at(0, game.height() / 2).up(1)
+	const property image = "start.png"
 
 }
 
