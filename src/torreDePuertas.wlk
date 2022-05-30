@@ -1,5 +1,4 @@
 import wollok.game.*
-import escenarios.*
 
 class Puerta {
 
@@ -95,7 +94,7 @@ object nivelPlataformaFactory {
 
 object torreDePuertas {
 
-	const cantidadNiveles = 3
+	var property cantidadNiveles = 3
 	const positionInicialPlataforma = game.at(1, game.height()) // game.at(2,9)
 	const property nivelesPlataformas = []
 
