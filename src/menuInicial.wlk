@@ -3,10 +3,17 @@ import dificultades.*
 import teclado.*
 import tablero.*
 
-object pressEnter {
+object start {
 
-	const property position = game.at(0, game.height() / 2).up(1)
+	const property position = game.at(0, game.height()).down(5)
 	const property image = "start.png"
+
+}
+
+object menuOpciones {
+
+	const property position = game.at(0, 0).up(3)
+	const property image = "menu_opciones.png"
 
 }
 
@@ -15,8 +22,9 @@ object menuInicial {
 	const dificultades = [ dificultadUno, dificultadDos ]
 
 	method agregarOpciones() {
-		game.addVisual(pressEnter)
+		game.addVisual(start)
 		dificultades.forEach({ dificultad => game.addVisual(dificultad)})
+		game.addVisual(menuOpciones)
 	}
 
 	method iniciar() {
