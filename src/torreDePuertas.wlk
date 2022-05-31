@@ -22,16 +22,34 @@ class Plataforma {
 }
 
 class NivelPlataforma {
-
+	
+	const property nroNivel
+	const esNivelFinal = false
 	const property plataformas = []
-	const puertas = []
+	const property puertas = []
 	var positionInicialPlataforma
-	const cantidadPuertas = 7 // Consultar a configuracion dificultad
-	const cantidadPlataformas = cantidadPuertas * 2 + 1
+	//const cantidadPuertas = 7
+	//const cantidadPlataformas = cantidadPuertas * 2 + 1
+	
+	method cantidadPlataformas() = self.cantidadPuertas() * 2 + 1
+	
+	method cantidadPuertas() = if (not esNivelFinal) { 7 } else { 1 }
+	
+	method puertaSiguienteNivel(){
+		const siguienteNivel = torreDePuertas.siguienteNivel(self)
+		return siguienteNivel.puertas().anyOne()
+	}
+	
+	method positionSiguienteNivel(){
+		return self.puertaSiguienteNivel().position()
+	}
 
 	method configurarPuertasPositionDestino() {
 		const positionsDestino = puertas.map({ puerta => puerta.position() })
+		const positionSiguienteNivel = positionsDestino.anyOne().down(4) // nivelPlataformaFactory.positionYSiguiente()
+		//const positionSiguienteNivel = self.positionSiguienteNivel()
 		puertas.forEach({ puerta => puerta.positionDestino(positionsDestino.anyOne())})
+		puertas.anyOne().positionDestino(positionSiguienteNivel)
 	}
 
 	method construirPuertas() {
@@ -42,7 +60,7 @@ class NivelPlataforma {
 
 	method construirPlataforma() {
 		plataformaFactory.positionInicial(positionInicialPlataforma)
-		cantidadPlataformas.times({ i => plataformas.add(plataformaFactory.construirPlataforma())})
+		self.cantidadPlataformas().times({ i => plataformas.add(plataformaFactory.construirPlataforma())})
 		self.construirPuertas()
 	}
 
@@ -85,9 +103,9 @@ object nivelPlataformaFactory {
 		position = position.down(4) //Espacio entre nivel plataformas
 	}
 
-	method construirNivelPlataforma() {
+	method construirNivelPlataforma(_nroNivel, _esNivelFinal) {
 		self.positionYSiguiente()
-		return new NivelPlataforma(positionInicialPlataforma = position)
+		return new NivelPlataforma(positionInicialPlataforma = position, nroNivel = _nroNivel, esNivelFinal = _esNivelFinal)
 	}
 
 }
@@ -95,12 +113,20 @@ object nivelPlataformaFactory {
 object torreDePuertas {
 
 	var property cantidadNiveles = 3
-	const positionInicialPlataforma = game.at(1, game.height()) // game.at(2,9)
+	const positionInicialPlataforma = game.at(1, game.height())
 	const property nivelesPlataformas = []
+	
+	method siguienteNivel(_nivelPlataforma){
+		const nroNivel = _nivelPlataforma.nroNivel()
+		return nivelesPlataformas.findOrDefault({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel + 1 }, _nivelPlataforma)
+	}
 
 	method construirTorreDePuertas() {
+		var esNivelFinal = false
 		nivelPlataformaFactory.positionInicial(positionInicialPlataforma)
-		cantidadNiveles.times({ i => nivelesPlataformas.add(nivelPlataformaFactory.construirNivelPlataforma())})
+		cantidadNiveles.times({ nroNivel => nivelesPlataformas.add(nivelPlataformaFactory.construirNivelPlataforma(nroNivel, esNivelFinal)) })
+		esNivelFinal = true
+		nivelesPlataformas.add(nivelPlataformaFactory.construirNivelPlataforma(cantidadNiveles + 1, esNivelFinal))
 	}
 
 	method agregarAlTablero() {
