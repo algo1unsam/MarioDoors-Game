@@ -2,7 +2,7 @@ import wollok.game.*
 
 class Puerta {
 
-	const property image = 'caja.png'
+	const property image = 'puerta.png'
 	var property position
 	const property esPuerta = true
 	var property positionDestino = game.at(0, 0)
@@ -15,7 +15,7 @@ class Puerta {
 
 class Plataforma {
 
-	const property image = 'muro.png'
+	const property image = 'plataforma.png'
 	var property position
 	const property esPlataforma = true
 
