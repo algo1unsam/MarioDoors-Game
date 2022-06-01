@@ -21,7 +21,7 @@ class Dificultad {
 
 }
 
-object dificultadUno inherits Dificultad(imageDificultad="dificultad_uno", position=start.position().down(3)){
+object dificultadUno inherits Dificultad(imageDificultad="dificultad_uno", imageSeleccionada = "_seleccionada", position=start.position().down(3)){
 
 }
 
