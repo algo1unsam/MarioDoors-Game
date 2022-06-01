@@ -1,7 +1,5 @@
 import dificultades.*
 import direcciones.*
-import escenarios.*
-import objects.*
 import personajes.*
 import tablero.*
 import torreDePuertas.*

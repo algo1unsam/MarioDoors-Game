@@ -4,7 +4,6 @@ import torreDePuertas.*
 import personajes.*
 import teclado.*
 
-
 object tablero {
 
 	method setearFondo() {
@@ -21,10 +20,12 @@ object tablero {
 
 	method agregarPersonajes() {
 		game.addVisual(mario)
+		game.addVisual(mario.habilidad())
 		game.addVisual(luigi)
+		game.addVisual(luigi.habilidad())
 	}
-	
-	method setearDificultad(dificultad){
+
+	method setearDificultad(dificultad) {
 		torreDePuertas.cantidadNiveles(dificultad.cantidadNiveles())
 	}
 

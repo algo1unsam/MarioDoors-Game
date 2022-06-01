@@ -10,10 +10,10 @@ class Personaje {
 	var property position = self.positionInicial()
 	var property direccionMovimiento
 	var property velocidad = 1
+	const property oponente = null
 	var property cambioDireccion = false
-	const property habilidades = #{}
-	const property habilidadesQueAfectanAlRival = #{cambiadorDeTeclas,freezearAlOponente}
-	
+	var property habilidad = null
+
 	method image() = imagePersonaje + self.imageDireccion() + ".png"
 
 	method imageDireccion() = direccionMovimiento.toString()
@@ -28,15 +28,23 @@ class Personaje {
 		mundo.validarPosition(positionSiguiente, self)
 	}
 
+	method moverHabilidad() {
+		if (habilidad != null) {
+			habilidad.position(self.position().up(2))
+		}
+	}
+
 	method mover(direccion) {
-		const positionSiguiente = direccion.siguiente(position, velocidad,cambioDireccion)
+		const positionSiguiente = direccion.siguiente(position, velocidad, cambioDireccion)
 		self.validarPosition(positionSiguiente)
 		position = positionSiguiente
+		self.moverHabilidad()
 		direccionMovimiento = direccion
 	}
 
 	method salirPuerta() {
 		direccionMovimiento = frente
+		self.moverHabilidad()
 	}
 
 	method entrarPuerta() {
@@ -49,63 +57,36 @@ class Personaje {
 		puerta.trasladar(self)
 		self.salirPuerta()
 	}
-	
-	method agarrar(habilidad){
-		if (habilidades.isEmpty()){
-			self.restartHabilidades()
-			habilidades.add(habilidad)
+
+	method agarrar(_habilidad) {
+		habilidad = _habilidad
+		self.moverHabilidad()
+	}
+
+	method limpiarHabilidad() {
+		game.removeVisual(habilidad)
+		habilidad = null
+	}
+
+	method accionarHabilidad() {
+		if (habilidad == null) {
+			self.error('No hay habilitad para usar')
 		}
+		habilidad.actuar(self)
+		self.limpiarHabilidad()
 	}
-	
-	method restartHabilidades() {
-		habilidades.clear() 
-	}
-	
-	method accionarHabilidad(){
-		if (not habilidades.isEmpty()){
-			habilidades.forEach({habilidad => habilidad.actuar(self)})
-			self.restartHabilidades()
-		}
-	}
-	
-	method verificarSiLaHabilidadAfectaAlRival(){
-		return self.estaFreezearAlOponenteOCambiadorDeTeclasEnHabilidades()
-	}
-	
-	method estaFreezearAlOponenteOCambiadorDeTeclasEnHabilidades(){
-		return habilidades.intersection(habilidadesQueAfectanAlRival) != #{}
-	}
-	
+
 }
 
-object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha) {
+object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidad = cambiadorDeTeclas) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().first()
-	
-	override method accionarHabilidad(){
-		if (self.verificarSiLaHabilidadAfectaAlRival() and not habilidades.isEmpty()){
-			habilidades.forEach({habilidad => habilidad.actuar(luigi)})
-			self.restartHabilidades()
-		}
-		else{
-			super()
-		}
-	}
+
 }
 
-object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda) {
+object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidad = freezearAlOponente) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().last()
-	
-	override method accionarHabilidad(){
-		if (self.verificarSiLaHabilidadAfectaAlRival()){
-			habilidades.forEach({habilidad => habilidad.actuar(mario)})
-			self.restartHabilidades()
-		}
-		else{
-			super()
-		}
-		
-	}
+
 }
 
