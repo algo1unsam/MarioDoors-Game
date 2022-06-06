@@ -8,7 +8,7 @@ object tablero {
 
 	method setearFondo() {
 		game.title("Mario Doors Game")
-		game.cellSize(50)
+		game.cellSize(80)
 		game.width(15)
 		game.height(21)
 		game.ground("fondo_negro.png")

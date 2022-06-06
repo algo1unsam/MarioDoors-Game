@@ -13,6 +13,7 @@ class Personaje {
 	const property oponente = null
 	var property cambioDireccion = false
 	var property habilidad = null
+	const property esPuerta = false
 
 	method image() = imagePersonaje + self.imageDireccion() + ".png"
 
@@ -42,18 +43,26 @@ class Personaje {
 		direccionMovimiento = direccion
 	}
 
+	method puertaMismaPosition() {
+		const objetosMismaPosicion = self.position().allElements()
+			// objetosMismaPosicion.removeAllSuchThat({ objeto => not objeto.esPuerta() })
+		objetosMismaPosicion.remove(self)
+		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
+			self.error("No hay puerta para entrar")
+		}
+		return objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
+	}
+
 	method salirPuerta() {
+		const puerta = self.puertaMismaPosition()
+		puerta.abrir()
 		direccionMovimiento = frente
 		self.moverHabilidad()
 	}
 
 	method entrarPuerta() {
-		const objetosMismaPosicion = self.position().allElements()
-		objetosMismaPosicion.remove(self)
-		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
-			self.error("No hay puerta para entrar")
-		}
-		const puerta = objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
+		const puerta = self.puertaMismaPosition()
+		puerta.abrir()
 		puerta.trasladar(self)
 		self.salirPuerta()
 	}
