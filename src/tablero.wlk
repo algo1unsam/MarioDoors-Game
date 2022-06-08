@@ -5,9 +5,6 @@ import personajes.*
 import teclado.*
 
 object tablero {
-	const tableroInterno = []
-	const ancho = 15
-	const alto = 20
 
 	method setearFondo() {
 		game.title("Mario Doors Game")

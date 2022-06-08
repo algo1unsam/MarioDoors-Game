@@ -64,9 +64,9 @@ class NivelPlataforma {
 	}
 
 	method puertaSiguienteNivel() = torreDePuertas.siguienteNivel(self).puertas().anyOne()
-	
+
 	method puertaCualquierNivel() = torreDePuertas.cualquierNivel(self).puertas().anyOne()
-	
+
 	method puertaAnteriorNivel() = torreDePuertas.anteriorNivel(self).puertas().anyOne()
 
 	method configurarPuertaDestinoSiguienteNivel() {
@@ -91,7 +91,6 @@ class NivelPlataforma {
 		if (not esNivelFinal) {
 			puertas.forEach({ puerta => puerta.puertaDestino(self.puertaCualquierNivel())})
 		} else {
-			// self.configurarPuertaFinal()
 			puertas.forEach({ puerta =>
 				puerta.puertaDestino(puerta)
 			; self.configurarPuertaFinal(puerta)

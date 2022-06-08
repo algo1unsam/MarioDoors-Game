@@ -48,7 +48,7 @@ object freezearAlOponente inherits Habilidad(image = 'item_violeta.png') {
 		const oponente = personaje.oponente()
 		oponente.velocidad(0)
 		game.say(oponente, 'Congelado')
-		game.schedule(10000, { personaje.oponente().velocidad(1)})
+		game.schedule(5000, { personaje.oponente().velocidad(1)})
 	}
 
 }
