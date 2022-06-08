@@ -53,15 +53,12 @@ class Personaje {
 	}
 
 	method salirPuerta() {
-//		const puerta = self.puertaMismaPosition()
-//		puerta.abrir()
 		direccionMovimiento = frente
 		self.moverHabilidad()
 	}
 
 	method entrarPuerta() {
 		const puerta = self.puertaMismaPosition()
-//		puerta.abrir()
 		puerta.trasladar(self)
 		self.salirPuerta()
 	}

@@ -14,7 +14,6 @@ class Puerta {
 	var property estaAbierta = false
 	var property position
 	var property puertaDestino = null
-	// var property positionDestino = game.at(0, 0)
 	const property esPuerta = true
 
 	method image() = imagenPuerta + self.imagenAbierta() + ".png"
@@ -201,10 +200,6 @@ object torreDePuertas {
 		cantidadNiveles.times({ nroNivel => self.agregarNivelPlataforma(nroNivel, esNivelFinal)})
 		esNivelFinal = true
 		self.agregarNivelPlataforma(cantidadNiveles + 1, esNivelFinal)
-//		var esNivelFinal = false
-//		cantidadNiveles.times({ nroNivel => nivelesPlataformas.add(nivelPlataformaFactory.construirNivelPlataforma(nroNivel, esNivelFinal))})
-//		esNivelFinal = true
-//		nivelesPlataformas.add(nivelPlataformaFactory.construirNivelPlataforma(cantidadNiveles + 1, esNivelFinal))
 	}
 
 	method agregarAlTablero() {
