@@ -64,35 +64,39 @@ class NivelPlataforma {
 	}
 
 	method puertaSiguienteNivel() = torreDePuertas.siguienteNivel(self).puertas().anyOne()
+	
+	method puertaCualquierNivel() = torreDePuertas.cualquierNivel(self).puertas().anyOne()
+	
+	method puertaAnteriorNivel() = torreDePuertas.anteriorNivel(self).puertas().anyOne()
 
 	method configurarPuertaDestinoSiguienteNivel() {
 		puertas.anyOne().puertaDestino(self.puertaSiguienteNivel())
 	}
-	
-	method puertaCualquierNivel() = torreDePuertas.cualquierNivel(self).puertas().anyOne()
-	
+
 	method configurarPuertaDestinoCualquierNivel() {
 		puertas.anyOne().puertaDestino(self.puertaCualquierNivel())
 	}
 
 	method configurarPuertasDestinoDescendiente() {
-		puertas.forEach({ puerta => puerta.puertaDestino(puertas.anyOne())}) //Seteo puertas destino en mismo nivel de plataformas
-		self.configurarPuertaDestinoSiguienteNivel() //Seteo puerta destino al siguiente nivel de plataformas
+		puertas.forEach({ puerta => puerta.puertaDestino(puertas.anyOne())}) // Seteo puertas destino en mismo nivel de plataformas
+		self.configurarPuertaDestinoSiguienteNivel() // Seteo puerta destino al siguiente nivel de plataformas
 	}
-	
-	method configurarPuertaFinal(puerta){
-		const puertaConPuertaDestinoFinal = self.puertaCualquierNivel()
+
+	method configurarPuertaFinal(puerta) {
+		const puertaConPuertaDestinoFinal = self.puertaAnteriorNivel() // Seteo puerta final com puerta destino para una puerta del penultimo nivel
 		puertaConPuertaDestinoFinal.puertaDestino(puerta)
 	}
-	
+
 	method configurarPuertasDestinoAleatorio() {
-		if(not esNivelFinal){
+		if (not esNivelFinal) {
 			puertas.forEach({ puerta => puerta.puertaDestino(self.puertaCualquierNivel())})
-		}else{
-			//self.configurarPuertaFinal()
-			puertas.forEach({ puerta => puerta.puertaDestino(puerta); self.configurarPuertaFinal(puerta)}) //Seteo puerta destino a si misma en el nivel de plataformas final
+		} else {
+			// self.configurarPuertaFinal()
+			puertas.forEach({ puerta =>
+				puerta.puertaDestino(puerta)
+			; self.configurarPuertaFinal(puerta)
+			}) // Seteo puerta destino a si misma en el nivel de plataformas final
 		}
-		
 	}
 
 	method configurarPuertasDestino(seteoPuertasDestinoDescendiente) {
@@ -174,22 +178,18 @@ object torreDePuertas {
 	const property nivelesPlataformas = []
 	var property seteoPuertasDestinoDescendiente = true
 
+	method anteriorNivel(_nivelPlataforma) {
+		const nroNivel = _nivelPlataforma.nroNivel()
+		return nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel - 1 })
+	}
+
 	method siguienteNivel(_nivelPlataforma) {
 		const nroNivel = _nivelPlataforma.nroNivel()
-		return nivelesPlataformas.findOrDefault({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel + 1 }, _nivelPlataforma) //Seteo puerta destino a en el siguiente nivel de plataformas o en el mismo nivel si es nivel final
+		return nivelesPlataformas.findOrDefault({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel + 1 }, _nivelPlataforma) // Seteo puerta destino a en el siguiente nivel de plataformas o en el mismo nivel si es nivel final
 	}
 
 	method cualquierNivel(_nivelPlataforma) {
-//		var nivelPlataforma
-//		if(not _nivelPlataforma.esNivelFinal()){
-//			const nroNivelAleatorio = (0..cantidadNiveles).anyOne()
-//			nivelPlataforma = nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivelAleatorio })
-//		}
-//		else{
-//			nivelPlataforma = _nivelPlataforma
-//		}
-//		return nivelPlataforma
-		const nroNivelAleatorio = (1..cantidadNiveles).anyOne() // Cualquier nivel de plataforma que no es nivel final
+		const nroNivelAleatorio = (1 .. cantidadNiveles).anyOne() // Cualquier nivel de plataforma que no es nivel final
 		return nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivelAleatorio })
 	}
 
