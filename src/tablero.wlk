@@ -7,13 +7,13 @@ import teclado.*
 object tablero {
 	const tableroInterno = []
 	const ancho = 15
-	const alto = 21
+	const alto = 20
 
 	method setearFondo() {
 		game.title("Mario Doors Game")
 		game.cellSize(80)
 		game.width(15)
-		game.height(21)
+		game.height(20)
 		game.ground("fondo_negro.png")
 	}
 
@@ -29,7 +29,7 @@ object tablero {
 	}
 
 	method setearDificultad(dificultad) {
-		torreDePuertas.cantidadNiveles(dificultad.cantidadNiveles())
+		torreDePuertas.seteoPuertasDestinoDescendiente(dificultad.seteoPuertasDestinoDescendiente())
 	}
 
 	method setearEntorno() {

@@ -6,11 +6,10 @@ class Dificultad {
 	const imageDificultad
 	var property imageSeleccionada = ""
 	const property position
+	const property seteoPuertasDestinoDescendiente
 	
 	method image() = imageDificultad + imageSeleccionada + ".png"
 
-	method cantidadNiveles() = 3
-	
 	method seleccionar(){
 		imageSeleccionada = "_seleccionada"
 	}
@@ -21,12 +20,10 @@ class Dificultad {
 
 }
 
-object dificultadUno inherits Dificultad(imageDificultad="dificultad_uno", imageSeleccionada = "_seleccionada", position=start.position().down(3)){
-
+object dificultadUno inherits Dificultad(imageDificultad="dificultad_uno", imageSeleccionada = "_seleccionada", position=start.position().down(3), seteoPuertasDestinoDescendiente=true){
+	
 }
 
-object dificultadDos inherits Dificultad(imageDificultad="dificultad_dos", position=dificultadUno.position().down(2)){
-
-	override method cantidadNiveles() = 4
+object dificultadDos inherits Dificultad(imageDificultad="dificultad_dos", position=dificultadUno.position().down(2), seteoPuertasDestinoDescendiente=false){
 
 }

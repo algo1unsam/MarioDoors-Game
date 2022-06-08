@@ -31,7 +31,7 @@ class Personaje {
 
 	method moverHabilidad() {
 		if (habilidad != null) {
-			habilidad.position(self.position().up(2))
+			habilidad.position(direccionMovimiento.siguiente(position, velocidad, true))
 		}
 	}
 
@@ -39,13 +39,12 @@ class Personaje {
 		const positionSiguiente = direccion.siguiente(position, velocidad, cambioDireccion)
 		self.validarPosition(positionSiguiente)
 		position = positionSiguiente
-		self.moverHabilidad()
 		direccionMovimiento = direccion
+		self.moverHabilidad()
 	}
 
 	method puertaMismaPosition() {
 		const objetosMismaPosicion = self.position().allElements()
-			// objetosMismaPosicion.removeAllSuchThat({ objeto => not objeto.esPuerta() })
 		objetosMismaPosicion.remove(self)
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
 			self.error("No hay puerta para entrar")
@@ -54,15 +53,15 @@ class Personaje {
 	}
 
 	method salirPuerta() {
-		const puerta = self.puertaMismaPosition()
-		puerta.abrir()
+//		const puerta = self.puertaMismaPosition()
+//		puerta.abrir()
 		direccionMovimiento = frente
 		self.moverHabilidad()
 	}
 
 	method entrarPuerta() {
 		const puerta = self.puertaMismaPosition()
-		puerta.abrir()
+//		puerta.abrir()
 		puerta.trasladar(self)
 		self.salirPuerta()
 	}
