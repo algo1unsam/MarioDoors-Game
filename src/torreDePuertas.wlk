@@ -32,11 +32,20 @@ class Puerta {
 	method trasladar(personaje) {
 		self.abrir()
 		personaje.position(puertaDestino.position())
-		puertaDestino.abrir()
+		//puertaDestino.abrir()
+		puertaDestino.entrar(personaje)
+	}
+	method entrar(personaje){
+		self.abrir()
 	}
 
 }
-
+class PuertaFinal inherits Puerta{
+	override method entrar(personaje){
+		super(personaje)
+		game.say(personaje,'ganè')
+	}
+}
 class Plataforma {
 
 	const property image = 'plataforma.png'
@@ -113,7 +122,7 @@ class NivelPlataforma {
 	method construirPuertas() {
 		if (esNivelFinal) {
 			const posicionPuerta = posicionInicialPlataforma.right(self.cantidadPlataformas() / 2 - 1)
-			puertas.add(new Puerta(position = posicionPuerta.up(1)))
+			puertas.add(new PuertaFinal(position = posicionPuerta.up(1)))
 		} else {
 			const plataformasPositionXImpar = plataformas.filter({ plataforma => plataforma.position().x().odd() })
 			plataformasPositionXImpar.forEach({ plataforma => puertas.add(new Puerta(position = plataforma.position().up(1)))})
