@@ -1,4 +1,3 @@
-import dificultades.*
 import direcciones.*
 import personajes.*
 import tablero.*

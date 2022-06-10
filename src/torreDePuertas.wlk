@@ -18,11 +18,7 @@ class Puerta {
 
 	method image() = imagenPuerta + self.imagenAbierta() + ".png"
 
-	method imagenAbierta() = if (estaAbierta) {
-		"_abierta"
-	} else {
-		""
-	}
+	method imagenAbierta() = if (estaAbierta) "_abierta" else ""
 
 	method abrir() {
 		estaAbierta = true
@@ -50,26 +46,20 @@ class Plataforma {
 
 	const property image = 'plataforma.png'
 	var property position
-	const property esPlataforma = true
 
 }
 
 class NivelPlataforma {
 
 	const property nroNivel = 0
-	const esNivelFinal = false
+	const esNivelFinal
+	const cantidadPlataformas = 15
 	const property plataformas = []
 	const property puertas = []
 	const property antorchas = []
 	var posicionInicialPlataforma
 
-	method cantidadPlataformas() = 15 // self.cantidadPuertas() * 2 + 1
-
-	method cantidadPuertas() = if (not esNivelFinal) {
-		7
-	} else {
-		1
-	}
+	method cantidadPuertas() = if (not esNivelFinal) 7 else 1
 
 	method puertaSiguienteNivel() = torreDePuertas.siguienteNivel(self).puertas().anyOne()
 
@@ -121,8 +111,8 @@ class NivelPlataforma {
 
 	method construirPuertas() {
 		if (esNivelFinal) {
-			const posicionPuerta = posicionInicialPlataforma.right(self.cantidadPlataformas() / 2 - 1)
-			puertas.add(new PuertaFinal(position = posicionPuerta.up(1)))
+			const posicionPlataformaCentral = posicionInicialPlataforma.right(cantidadPlataformas / 2)
+			puertas.add(new Puerta(position = posicionPlataformaCentral.up(1)))
 		} else {
 			const plataformasPositionXImpar = plataformas.filter({ plataforma => plataforma.position().x().odd() })
 			plataformasPositionXImpar.forEach({ plataforma => puertas.add(new Puerta(position = plataforma.position().up(1)))})
@@ -131,7 +121,7 @@ class NivelPlataforma {
 
 	method construirPlataforma() {
 		plataformaFactory.posicionInicial(posicionInicialPlataforma)
-		self.cantidadPlataformas().times({ i => plataformas.add(plataformaFactory.construirPlataforma())})
+		cantidadPlataformas.times({ i => plataformas.add(plataformaFactory.construirPlataforma())})
 		self.construirPuertas()
 		self.construirAntorchas()
 	}
@@ -150,7 +140,7 @@ object plataformaFactory {
 	var position
 
 	method posicionInicial(_posicionInicial) {
-		position = _posicionInicial.left(2)
+		position = _posicionInicial.left(1)
 	}
 
 	method posicionXSiguiente() {
@@ -166,7 +156,7 @@ object plataformaFactory {
 
 object nivelPlataformaFactory {
 
-	var position = game.at(1, game.height())
+	var position = game.at(0, game.height())
 
 	method positionYSiguiente() {
 		position = position.down(4) // Espacio entre nivel plataformas

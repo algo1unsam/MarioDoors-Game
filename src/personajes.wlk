@@ -7,7 +7,7 @@ import habilidades.*
 class Personaje {
 
 	const imagePersonaje
-	var property position = self.positionInicial()
+	var property position = self.posicionInicial()
 	var property direccionMovimiento
 	var property velocidad = 1
 	const property oponente = null
@@ -19,11 +19,11 @@ class Personaje {
 
 	method imageDireccion() = direccionMovimiento.toString()
 
-	method positionInicial() = self.plataformaInicial().position().up(1)
-
 	method nivelPlataformaInicial() = torreDePuertas.nivelesPlataformas().first().plataformas()
 
 	method plataformaInicial() = self.nivelPlataformaInicial().anyOne()
+
+	method posicionInicial() = self.plataformaInicial().position().up(1)
 
 	method validarPosition(positionSiguiente) {
 		mundo.validarPosition(positionSiguiente, self)
