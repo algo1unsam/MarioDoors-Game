@@ -1,7 +1,7 @@
 import wollok.game.*
 import dificultades.*
 import teclado.*
-import tablero.*
+import torreDePuertas.*
 
 object start {
 
@@ -35,7 +35,7 @@ object menuInicial {
 	method seleccionar(dificultadSeleccionada) {
 		dificultades.forEach({ dificultad => dificultad.deseleccionar()})
 		dificultadSeleccionada.seleccionar()
-		tablero.setearDificultad(dificultadSeleccionada)
+		torreDePuertas.seteoPuertasDestinoDescendiente(dificultadSeleccionada.seteoPuertasDestinoDescendiente())
 	}
 
 }

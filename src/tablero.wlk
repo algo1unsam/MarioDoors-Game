@@ -25,10 +25,6 @@ object tablero {
 		game.addVisual(luigi.habilidad())
 	}
 
-	method setearDificultad(dificultad) {
-		torreDePuertas.seteoPuertasDestinoDescendiente(dificultad.seteoPuertasDestinoDescendiente())
-	}
-
 	method setearEntorno() {
 		game.clear()
 		self.agregarTorreDePuertas()

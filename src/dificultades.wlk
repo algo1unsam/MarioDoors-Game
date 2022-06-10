@@ -1,4 +1,3 @@
-import wollok.game.*
 import menuInicial.*
 
 class Dificultad {
@@ -27,4 +26,3 @@ object dificultadUno inherits Dificultad(imageDificultad = "dificultad_uno", ima
 object dificultadDos inherits Dificultad(imageDificultad = "dificultad_dos", position = dificultadUno.position().down(2), seteoPuertasDestinoDescendiente = false) {
 
 }
-
