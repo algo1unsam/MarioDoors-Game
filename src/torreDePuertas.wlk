@@ -28,11 +28,20 @@ class Puerta {
 	method trasladar(personaje) {
 		self.abrir()
 		personaje.position(puertaDestino.position())
-		puertaDestino.abrir()
+		//puertaDestino.abrir()
+		puertaDestino.entrar(personaje)
+	}
+	method entrar(personaje){
+		self.abrir()
 	}
 
 }
-
+class PuertaFinal inherits Puerta{
+	override method entrar(personaje){
+		super(personaje)
+		game.say(personaje,'ganè')
+	}
+}
 class Plataforma {
 
 	const property image = 'plataforma.png'

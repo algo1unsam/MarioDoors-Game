@@ -3,6 +3,7 @@ import menuInicial.*
 import torreDePuertas.*
 import personajes.*
 import teclado.*
+import sonidos.*
 
 object tablero {
 
@@ -13,7 +14,6 @@ object tablero {
 		game.height(20)
 		game.ground("fondo_negro.png")
 	}
-
 	method agregarTorreDePuertas() {
 		torreDePuertas.agregarAlTablero()
 	}
@@ -35,7 +35,9 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		menuInicial.iniciar()
+		musica.fondo()
 	}
+	
 
 }
 

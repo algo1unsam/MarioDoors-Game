@@ -1,5 +1,6 @@
 import wollok.game.*
 import tablero.*
+import sonidos.*
 
 program MarioDoorsGame {
 	tablero.iniciar()
