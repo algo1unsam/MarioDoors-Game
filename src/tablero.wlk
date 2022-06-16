@@ -20,9 +20,9 @@ object tablero {
 
 	method agregarPersonajes() {
 		game.addVisual(mario)
-		game.addVisual(mario.habilidad())
+		game.addVisual(mario.habilidad().asList().first())
 		game.addVisual(luigi)
-		game.addVisual(luigi.habilidad())
+		game.addVisual(luigi.habilidad().asList().first()))
 	}
 
 	method setearEntorno() {
