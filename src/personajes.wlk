@@ -3,6 +3,7 @@ import torreDePuertas.*
 import direcciones.*
 import validaciones.*
 import habilidades.*
+import sonidos.*
 
 class Personaje {
 
@@ -49,6 +50,7 @@ class Personaje {
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
 			self.error("No hay puerta para entrar")
 		}
+		musica.cancion("puerta.mp3", false,100)
 		return objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
 	}
 
@@ -79,6 +81,7 @@ class Personaje {
 		}
 		habilidad.actuar(self)
 		self.limpiarHabilidad()
+		musica.cancion("sonidoHabilidad.mp3",false,100)
 	}
 
 }

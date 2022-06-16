@@ -35,7 +35,7 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		menuInicial.iniciar()
-		musica.fondo()
+		musica.cancion("TemaPrincipal.mp3",true,200)
 	}
 	
 
