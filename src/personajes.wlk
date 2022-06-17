@@ -13,7 +13,7 @@ class Personaje {
 	var property velocidad = 1
 	const property oponente = null
 	var property cambioDireccion = false
-	var property habilidad = #{}
+	var property habilidades = []
 	const property esPuerta = false
 
 	method image() = imagePersonaje + self.imageDireccion() + ".png"
@@ -26,35 +26,24 @@ class Personaje {
 
 	method posicionInicial() = self.plataformaInicial().position().up(1)
 
-	method validarPosition(positionSiguiente) {
-		mundo.validarPosition(positionSiguiente, self)
-	}
-
-	method moverHabilidad() {
-		if (habilidad != #{}) {
-			self.elementoQueEstaDentroDeHabilidad().position(direccionMovimiento.siguiente(position, velocidad, true))
-		}
-	}
-	
-	method elementoQueEstaDentroDeHabilidad(){
-		return self.habilidad().asList().first()
+	method validarPosicion(posicionSiguiente) {
+		mundo.validarPosicion(posicionSiguiente, self)
 	}
 
 	method mover(direccion) {
-		const positionSiguiente = direccion.siguiente(position, velocidad, cambioDireccion)
-		self.validarPosition(positionSiguiente)
-		position = positionSiguiente
+		const posicionSiguiente = direccion.siguiente(position, velocidad, cambioDireccion)
+		self.validarPosicion(posicionSiguiente)
+		position = posicionSiguiente
 		direccionMovimiento = direccion
 		self.moverHabilidad()
 	}
 
-	method puertaMismaPosition() {
+	method puertaMismaPosicion() {
 		const objetosMismaPosicion = self.position().allElements()
 		objetosMismaPosicion.remove(self)
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
 			self.error("No hay puerta para entrar")
 		}
-		musica.cancion("puerta.mp3", false,100)
 		return objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
 	}
 
@@ -64,39 +53,56 @@ class Personaje {
 	}
 
 	method entrarPuerta() {
-		const puerta = self.puertaMismaPosition()
+		const puerta = self.puertaMismaPosicion()
 		puerta.trasladar(self)
 		self.salirPuerta()
 	}
 
-	method agarrar(_habilidad) {
-		habilidad = _habilidad
+	method noHayHabilidades() = habilidades.isEmpty()
+
+	method primeraHabilidad() = habilidades.first()
+
+	method moverHabilidad() {
+		if (not self.noHayHabilidades()) {
+			self.primeraHabilidad().mover(direccionMovimiento, position)
+		}
+	}
+
+	method agarrar(habilidad) {
+		habilidades.add(habilidad)
 		self.moverHabilidad()
 	}
 
-	method limpiarHabilidad() {
-		game.removeVisual(self.elementoQueEstaDentroDeHabilidad())
-		habilidad.clear()
+	method mostrarHabilidad() {
+		if (not self.noHayHabilidades()) {
+			game.addVisual(self.primeraHabilidad())
+		}
+	}
+
+	method limpiarHabilidad(habilidadAccionada) {
+		game.removeVisual(habilidadAccionada)
+		habilidades.remove(habilidadAccionada)
+		self.mostrarHabilidad()
 	}
 
 	method accionarHabilidad() {
-		if (habilidad == null) {
+		if (self.noHayHabilidades()) {
 			self.error('No hay habilitad para usar')
 		}
-		self.elementoQueEstaDentroDeHabilidad().actuar(self)
-		self.limpiarHabilidad()
-		musica.cancion("sonidoHabilidad.mp3",false,100)
+		const habilidadAccionada = self.primeraHabilidad()
+		habilidadAccionada.actuar(self)
+		self.limpiarHabilidad(habilidadAccionada)
 	}
 
 }
 
-object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidad = #{cambiadorDeTeclas}) {
+object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidades = [ llavePuertaFinal, freezearAlOponente ]) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().first()
 
 }
 
-object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidad = #{aumentarVelocidad}) {
+object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidades = [ ayudaPuertaFinal, cambiadorDeTeclas ]) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().last()
 

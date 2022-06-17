@@ -6,6 +6,8 @@ import teclado.*
 import sonidos.*
 
 object tablero {
+	
+	const sonidoDeFondo = "sonidoDeFondo.mp3"
 
 	method setearFondo() {
 		game.title("Mario Doors Game")
@@ -20,9 +22,9 @@ object tablero {
 
 	method agregarPersonajes() {
 		game.addVisual(mario)
-		game.addVisual(mario.habilidad().asList().first())
+		mario.mostrarHabilidad()
 		game.addVisual(luigi)
-		game.addVisual(luigi.habilidad().asList().first()))
+		luigi.mostrarHabilidad()
 	}
 
 	method setearEntorno() {
@@ -35,7 +37,7 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		menuInicial.iniciar()
-		musica.cancion("TemaPrincipal.mp3",true,200)
+		sonido.iniciar(sonidoDeFondo,true,200)
 	}
 	
 

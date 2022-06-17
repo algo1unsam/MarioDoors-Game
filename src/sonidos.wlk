@@ -1,14 +1,13 @@
 import wollok.game.*
 
-
-
-object musica{
-	method cancion(sonido,loop,tiempo){
-			const musicaFondo = game.sound(sonido)
-			//console.println("iniciar sonido")
-			musicaFondo.volume(0.5)
-			musicaFondo.shouldLoop(loop)
-			game.schedule(tiempo, { musicaFondo.play()} )
-			
+object sonido {
+	
+	method iniciar(_sonido, loop, tiempo) {
+		const sonido = game.sound(_sonido)
+		sonido.volume(0.5)
+		sonido.shouldLoop(loop)
+		game.schedule(tiempo, { sonido.play()})
 	}
+
 }
+
