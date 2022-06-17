@@ -3,6 +3,7 @@ import torreDePuertas.*
 import direcciones.*
 import validaciones.*
 import habilidades.*
+import sonidos.*
 
 class Personaje {
 
@@ -12,7 +13,7 @@ class Personaje {
 	var property velocidad = 1
 	const property oponente = null
 	var property cambioDireccion = false
-	var property habilidad = null
+	var property habilidad = #{}
 	const property esPuerta = false
 
 	method image() = imagePersonaje + self.imageDireccion() + ".png"
@@ -30,9 +31,13 @@ class Personaje {
 	}
 
 	method moverHabilidad() {
-		if (habilidad != null) {
-			habilidad.position(direccionMovimiento.siguiente(position, velocidad, true))
+		if (habilidad != #{}) {
+			self.elementoQueEstaDentroDeHabilidad().position(direccionMovimiento.siguiente(position, velocidad, true))
 		}
+	}
+	
+	method elementoQueEstaDentroDeHabilidad(){
+		return self.habilidad().asList().first()
 	}
 
 	method mover(direccion) {
@@ -49,6 +54,7 @@ class Personaje {
 		if (not objetosMismaPosicion.any({ objeto => objeto.esPuerta()})) {
 			self.error("No hay puerta para entrar")
 		}
+		musica.cancion("puerta.mp3", false,100)
 		return objetosMismaPosicion.find({ objeto => objeto.esPuerta() })
 	}
 
@@ -69,27 +75,28 @@ class Personaje {
 	}
 
 	method limpiarHabilidad() {
-		game.removeVisual(habilidad)
-		habilidad = null
+		game.removeVisual(self.elementoQueEstaDentroDeHabilidad())
+		habilidad.clear()
 	}
 
 	method accionarHabilidad() {
 		if (habilidad == null) {
 			self.error('No hay habilitad para usar')
 		}
-		habilidad.actuar(self)
+		self.elementoQueEstaDentroDeHabilidad().actuar(self)
 		self.limpiarHabilidad()
+		musica.cancion("sonidoHabilidad.mp3",false,100)
 	}
 
 }
 
-object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidad = cambiadorDeTeclas) {
+object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidad = #{cambiadorDeTeclas}) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().first()
 
 }
 
-object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidad = freezearAlOponente) {
+object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidad = #{aumentarVelocidad}) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().last()
 
