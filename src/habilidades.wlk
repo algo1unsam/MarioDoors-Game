@@ -1,29 +1,56 @@
 import wollok.game.*
+import direcciones.*
+import sonidos.*
+import torreDePuertas.*
 
 class Habilidad {
 
-	const property image
+	const imageHabilidad
 	var property position = game.at(0, 0)
+	const velocidad = 1
+	const cambioDireccion = true
+	var direccionMovimiento = frente
+	const sonidoHabilidad = "sonidoHabilidad.mp3"
 
-	method actuar(personaje)
+	method image() = imageHabilidad + self.imageDireccion() + ".png"
 
-}
+	method imageDireccion() = direccionMovimiento.toString()
 
-object aumentarVelocidad inherits Habilidad(image = 'item_rojo.png') {
+	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, cambioDireccion)
 
-//-Hacer que vaya mas rapido el personaje (hacer que la posicion cambie de a 3 celda -> cambio de velocidad)
-	override method actuar(personaje) {
-		personaje.velocidad(2)
-		game.say(personaje, 'Mas velocidad')
-		game.schedule(3000, { personaje.velocidad(1)})
+	method mover(direccion, posicionPersonaje) {
+		const posicionSiguiente = self.posicionSiguiente(direccion, posicionPersonaje)
+		position = posicionSiguiente
+		direccionMovimiento = direccion
+	}
+
+	method accionarSonido() {
+		sonido.iniciar(sonidoHabilidad, false, 100)
+	}
+
+	method actuar(personaje) {
+		self.accionarSonido()
 	}
 
 }
 
-object cambiadorDeTeclas inherits Habilidad(image = 'item_azul.png') {
+object aumentarVelocidad inherits Habilidad(imageHabilidad = 'item_rojo_') {
 
-	// -Cambio de direccion de las teclas del oponente por x segundos (metodo onTick - implementar con un on/off en la direccion de las teclas)
+	// Hace que vaya mas rapido el personaje
 	override method actuar(personaje) {
+		super(personaje)
+		personaje.velocidad(2)
+		game.say(personaje, 'Mas velocidad')
+		game.schedule(10000, { personaje.velocidad(1)})
+	}
+
+}
+
+object cambiadorDeTeclas inherits Habilidad(imageHabilidad = 'item_azul_') {
+
+	// Cambia de direccion de las teclas del oponente por x segundos
+	override method actuar(personaje) {
+		super(personaje)
 		const oponente = personaje.oponente()
 		oponente.cambioDireccion(true)
 		game.say(oponente, 'Me muevo al revés')
@@ -32,24 +59,42 @@ object cambiadorDeTeclas inherits Habilidad(image = 'item_azul.png') {
 
 }
 
-object ayudaDePuerta inherits Habilidad(image = 'item_verde.png') {
+object freezearAlOponente inherits Habilidad(imageHabilidad = 'item_violeta_') {
 
-	// -Cambiar color de la puerta que lleva al piso inferior
+	// Hace que el oponente se detenga por x segundos
 	override method actuar(personaje) {
-	// TODO
-	}
-
-}
-
-object freezearAlOponente inherits Habilidad(image = 'item_violeta.png') {
-
-	// -Hacer que el oponente se detenga por x segundos (hacer que la posicion cambie de a 0 celda -> cambio de velocidad) (metodo onTick - implementar con un on/off en la direccion de las teclas)
-	override method actuar(personaje) {
+		super(personaje)
 		const oponente = personaje.oponente()
 		oponente.velocidad(0)
 		game.say(oponente, 'Congelado')
 		game.schedule(5000, { personaje.oponente().velocidad(1)})
 	}
 
+}
+
+object ayudaPuertaFinal inherits Habilidad(imageHabilidad = 'item_verde_') {
+
+	// Cambia color de la puerta que lleva a la puerta final
+	override method actuar(personaje) {
+		torreDePuertas.puertaQueLlevaPuertaFinal().iluminar()
+	}
+
+}
+
+object llavePuertaFinal inherits Habilidad(imageHabilidad = 'llave_', cambioDireccion = false) {
+
+	// Hace la siguiente puerta que entre el personaje lo lleve a la puerta final
+	override method actuar(personaje) {
+		const puertaMismaPosicion = personaje.puertaMismaPosicion()
+		const puertaFinal = torreDePuertas.puertaFinal()
+		puertaMismaPosicion.puertaDestino(puertaFinal)
+		puertaMismaPosicion.trasladar(personaje)
+	}
+
+}
+
+object habilidadesFactory {
+
+//	const habilidades = [ freezearAlOponente ]
 }
 

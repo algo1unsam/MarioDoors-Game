@@ -3,14 +3,16 @@ import personajes.*
 
 class Direccion {
 
-	method siguiente(positionActual, velocidad) = positionActual
+	method siguiente(positionActual, velocidad)
 
-	method siguiente(positionActual, velocidad, cambioDireccion) = positionActual
+	method siguiente(positionActual, velocidad, cambioDireccion)
 
 }
 
 object frente inherits Direccion {
+	override method siguiente(positionActual, velocidad) = positionActual
 
+	override method siguiente(positionActual, velocidad, cambioDireccion) = positionActual
 }
 
 object izquierda inherits Direccion {
