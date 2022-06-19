@@ -1,40 +1,29 @@
 import wollok.game.*
+import elementosVisibles.*
 import torreDePuertas.*
 import direcciones.*
 import validaciones.*
 import habilidades.*
 import sonidos.*
 
-class Personaje {
+class Personaje inherits ElementoMovible {
 
-	const imagePersonaje
-	var property position = self.posicionInicial()
-	var property direccionMovimiento
-	var property velocidad = 1
+//	position = self.posicionInicial()
 	const property oponente = null
-	var property cambioDireccion = false
 	var property habilidades = []
-	const property esPuerta = false
 
-	method image() = imagePersonaje + self.imageDireccion() + ".png"
-
-	method imageDireccion() = direccionMovimiento.toString()
-
-	method nivelPlataformaInicial() = torreDePuertas.nivelesPlataformas().first().plataformas()
-
+	method nivelPlataformaInicial() = torreDePuertas.plataformasPorNivelPlataforma(1)
+	
 	method plataformaInicial() = self.nivelPlataformaInicial().anyOne()
 
 	method posicionInicial() = self.plataformaInicial().position().up(1)
 
-	method validarPosicion(posicionSiguiente) {
-		mundo.validarPosicion(posicionSiguiente, self)
-	}
-
-	method mover(direccion) {
-		const posicionSiguiente = direccion.siguiente(position, velocidad, cambioDireccion)
-		self.validarPosicion(posicionSiguiente)
-		position = posicionSiguiente
-		direccionMovimiento = direccion
+//	method validarPosicion(posicionSiguiente) {
+//		mundo.validarPosicion(posicionSiguiente, self)
+//	}
+	override method mover(direccion) {
+//		self.validarPosicionSiguiente(direccion)
+		super(direccion)
 		self.moverHabilidad()
 	}
 
@@ -62,12 +51,6 @@ class Personaje {
 
 	method primeraHabilidad() = habilidades.first()
 
-	method moverHabilidad() {
-		if (not self.noHayHabilidades()) {
-			self.primeraHabilidad().mover(direccionMovimiento, position)
-		}
-	}
-
 	method agarrar(habilidad) {
 		habilidades.add(habilidad)
 		self.moverHabilidad()
@@ -75,7 +58,13 @@ class Personaje {
 
 	method mostrarHabilidad() {
 		if (not self.noHayHabilidades()) {
-			game.addVisual(self.primeraHabilidad())
+			self.primeraHabilidad().mostrar()
+		}
+	}
+
+	method moverHabilidad() {
+		if (not self.noHayHabilidades()) {
+			self.primeraHabilidad().mover(direccionMovimiento, position)
 		}
 	}
 
@@ -96,13 +85,13 @@ class Personaje {
 
 }
 
-object mario inherits Personaje(imagePersonaje = "mario_", direccionMovimiento = derecha, oponente = luigi, habilidades = [ llavePuertaFinal, freezearAlOponente ]) {
+object mario inherits Personaje(image = "mario_", direccionMovimiento = derecha, oponente = luigi, position = game.at(0, game.height() - 2)) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().first()
 
 }
 
-object luigi inherits Personaje(imagePersonaje = "luigi_", direccionMovimiento = izquierda, oponente = mario, habilidades = [ ayudaPuertaFinal, cambiadorDeTeclas ]) {
+object luigi inherits Personaje(image = "luigi_", direccionMovimiento = izquierda, oponente = mario, position = game.at(game.width() - 1, game.height() - 2)) {
 
 	override method plataformaInicial() = self.nivelPlataformaInicial().last()
 

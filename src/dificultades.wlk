@@ -5,7 +5,7 @@ class Dificultad {
 	const imageDificultad
 	var property imageSeleccionada = ""
 	const property position
-	const property seteoPuertasDestinoDescendiente
+	const property dificultadDescendiente
 
 	method image() = imageDificultad + imageSeleccionada + ".png"
 
@@ -19,10 +19,10 @@ class Dificultad {
 
 }
 
-object dificultadUno inherits Dificultad(imageDificultad = "dificultad_uno", imageSeleccionada = "_seleccionada", position = start.position().down(3), seteoPuertasDestinoDescendiente = true) {
+object dificultadUno inherits Dificultad(imageDificultad = "dificultad_uno", imageSeleccionada = "_seleccionada", position = start.position().down(3), dificultadDescendiente = true) {
 
 }
 
-object dificultadDos inherits Dificultad(imageDificultad = "dificultad_dos", position = dificultadUno.position().down(2), seteoPuertasDestinoDescendiente = false) {
+object dificultadDos inherits Dificultad(imageDificultad = "dificultad_dos", position = dificultadUno.position().down(2), dificultadDescendiente = false) {
 
 }

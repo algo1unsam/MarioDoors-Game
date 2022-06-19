@@ -1,20 +1,12 @@
 import wollok.game.*
+import elementosVisibles.*
 import direcciones.*
 import sonidos.*
 import torreDePuertas.*
 
-class Habilidad {
+class Habilidad inherits ElementoMovible {
 
-	const imageHabilidad
-	var property position = game.at(0, 0)
-	const velocidad = 1
-	const cambioDireccion = true
-	var direccionMovimiento = frente
 	const sonidoHabilidad = "sonidoHabilidad.mp3"
-
-	method image() = imageHabilidad + self.imageDireccion() + ".png"
-
-	method imageDireccion() = direccionMovimiento.toString()
 
 	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, cambioDireccion)
 
@@ -34,7 +26,7 @@ class Habilidad {
 
 }
 
-object aumentarVelocidad inherits Habilidad(imageHabilidad = 'item_rojo_') {
+object aumentarVelocidad inherits Habilidad(image = 'item_rojo_') {
 
 	// Hace que vaya mas rapido el personaje
 	override method actuar(personaje) {
@@ -46,7 +38,7 @@ object aumentarVelocidad inherits Habilidad(imageHabilidad = 'item_rojo_') {
 
 }
 
-object cambiadorDeTeclas inherits Habilidad(imageHabilidad = 'item_azul_') {
+object cambiadorDeTeclas inherits Habilidad(image = 'item_azul_', sonidoHabilidad = "sonidoMichaelJacksonJijiii.mp3") {
 
 	// Cambia de direccion de las teclas del oponente por x segundos
 	override method actuar(personaje) {
@@ -59,7 +51,7 @@ object cambiadorDeTeclas inherits Habilidad(imageHabilidad = 'item_azul_') {
 
 }
 
-object freezearAlOponente inherits Habilidad(imageHabilidad = 'item_violeta_') {
+object freezearAlOponente inherits Habilidad(image = 'item_violeta_') {
 
 	// Hace que el oponente se detenga por x segundos
 	override method actuar(personaje) {
@@ -72,7 +64,7 @@ object freezearAlOponente inherits Habilidad(imageHabilidad = 'item_violeta_') {
 
 }
 
-object ayudaPuertaFinal inherits Habilidad(imageHabilidad = 'item_verde_') {
+object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_', sonidoHabilidad = "sonidoAyudaPuertaFinal.mp3") {
 
 	// Cambia color de la puerta que lleva a la puerta final
 	override method actuar(personaje) {
@@ -81,7 +73,7 @@ object ayudaPuertaFinal inherits Habilidad(imageHabilidad = 'item_verde_') {
 
 }
 
-object llavePuertaFinal inherits Habilidad(imageHabilidad = 'llave_', cambioDireccion = false) {
+object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = false) {
 
 	// Hace la siguiente puerta que entre el personaje lo lleve a la puerta final
 	override method actuar(personaje) {
@@ -93,8 +85,23 @@ object llavePuertaFinal inherits Habilidad(imageHabilidad = 'llave_', cambioDire
 
 }
 
-object habilidadesFactory {
+object generadorHabilidades {
 
-//	const habilidades = [ freezearAlOponente ]
+	const habilidades = #{ aumentarVelocidad, cambiadorDeTeclas, freezearAlOponente, ayudaPuertaFinal, llavePuertaFinal }
+	const habilidadesEnElTablero = #{}
+
+	method habilidadesNoEnElTablero() = habilidades.difference(habilidadesEnElTablero)
+
+	method hayHabilidadesDisponibles() = self.habilidadesNoEnElTablero().isEmpty()
+
+	method agregarAlTablero(position) {
+		if (not self.hayHabilidadesDisponibles()) {
+			const cualquierHabilidad = self.habilidadesNoEnElTablero().anyOne()
+			cualquierHabilidad.position(position)
+			cualquierHabilidad.mostrar()
+			habilidadesEnElTablero.add(cualquierHabilidad)
+		}
+	}
+
 }
 

@@ -1,10 +1,10 @@
 import wollok.game.*
+import elementosVisibles.*
 import sonidos.*
 
-class Puerta {
+class Puerta inherits ElementoVisible(image = 'puerta') {
 
-	const imagenPuerta = 'puerta'
-	var property position
+	//const imagenPuerta = 'puerta'
 	const property esPuerta = true
 	const property esPuertaFinal = false
 	var property estaAbierta = false
@@ -12,7 +12,7 @@ class Puerta {
 	var property puertaDestino = null
 	const sonidoPuerta = "sonidoPuerta.mp3"
 
-	method image() = imagenPuerta + self.imagenAbierta() + self.imagenIluminada() + ".png"
+	override method image() = image + self.imagenAbierta() + self.imagenIluminada() + ".png"
 
 	method imagenAbierta() = if (estaAbierta) "_abierta" else ""
 
@@ -52,7 +52,7 @@ class Puerta {
 
 }
 
-class PuertaFinal inherits Puerta(esPuertaFinal = true) {
+class PuertaFinal inherits Puerta(image = 'puerta', esPuertaFinal = true) {
 
 	var property puertaOrigen = null
 

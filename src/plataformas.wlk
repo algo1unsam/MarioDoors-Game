@@ -1,7 +1,6 @@
-class Plataforma {
+import elementosVisibles.*
 
-	const property image = 'plataforma.png'
-	var property position
+class Plataforma inherits ElementoVisible(image = 'plataforma.png') {
 
 }
 

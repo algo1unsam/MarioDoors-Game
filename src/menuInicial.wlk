@@ -35,7 +35,7 @@ object menuInicial {
 	method seleccionar(dificultadSeleccionada) {
 		dificultades.forEach({ dificultad => dificultad.deseleccionar()})
 		dificultadSeleccionada.seleccionar()
-		torreDePuertas.seteoPuertasDestinoDescendiente(dificultadSeleccionada.seteoPuertasDestinoDescendiente())
+		torreDePuertas.dificultadDescendiente(dificultadSeleccionada.dificultadDescendiente())
 	}
 
 }

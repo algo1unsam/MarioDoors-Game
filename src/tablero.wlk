@@ -13,7 +13,7 @@ object tablero {
 		game.title("Mario Doors Game")
 		game.cellSize(80)
 		game.width(15)
-		game.height(20)
+		game.height(16)
 		game.ground("fondo_negro.png")
 	}
 	method agregarTorreDePuertas() {
@@ -37,7 +37,7 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		menuInicial.iniciar()
-		sonido.iniciar(sonidoDeFondo,true,200)
+		sonido.iniciar(sonidoDeFondo,true,100)
 	}
 	
 

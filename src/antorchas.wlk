@@ -1,7 +1,7 @@
-class Antorcha {
+import elementosVisibles.*
 
-	const property image = 'antorcha.png'
-	var property position
+class Antorcha inherits ElementoVisible(image = 'antorcha.png') {
+
 	const property esPuerta = false
 
 }

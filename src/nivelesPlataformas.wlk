@@ -3,6 +3,7 @@ import torreDePuertas.*
 import plataformas.*
 import puertas.*
 import antorchas.*
+import habilidades.*
 
 class NivelPlataforma {
 
@@ -16,50 +17,37 @@ class NivelPlataforma {
 
 	method cantidadPuertas() = if (not esNivelFinal) 7 else 1
 
-	// method puertaQueLlevaPuertaFinal() = puertas.find({ puerta => puerta.puertaDestino().esPuertaFinal() }).uniqueElement()
-	method puertaSiguienteNivel() = torreDePuertas.siguienteNivel(self).puertas().anyOne()
+	method puertaSiguienteNivel() = torreDePuertas.siguienteNivelPlataforma(self).puertas().anyOne()
 
-	method puertaCualquierNivel() = torreDePuertas.cualquierNivel(self).puertas().anyOne()
+	method puertaCualquierNivel() = torreDePuertas.cualquierNivelPlataforma(self).puertas().anyOne()
 
-	method puertaAnteriorNivel() = torreDePuertas.anteriorNivel(self).puertas().anyOne()
+	method puertaAnteriorNivel() = torreDePuertas.anteriorNivelPlataforma(self).puertas().anyOne()
 
 	method configurarPuertaDestinoSiguienteNivel() {
 		puertas.anyOne().puertaDestino(self.puertaSiguienteNivel())
 	}
 
-	method configurarPuertaDestinoCualquierNivel() {
-		puertas.anyOne().puertaDestino(self.puertaCualquierNivel())
-	}
-
-	method configurarPuertasDestinoDescendiente() {
-		if (not esNivelFinal) {
+	method configurarPuertasDestinoSegunDificultad(dificultadDescendiente) {
+		if (dificultadDescendiente) {
 			puertas.forEach({ puerta => puerta.puertaDestino(puertas.anyOne())}) // Seteo puertas destino en mismo nivel de plataformas
-			self.configurarPuertaDestinoSiguienteNivel() // Seteo puerta destino al siguiente nivel de plataformas
+			self.configurarPuertaDestinoSiguienteNivel() // Seteo de una puerta destino al siguiente nivel de plataformas
 		} else {
-			self.configurarPuertaFinal() // Seteo puerta destino a si misma en el nivel de plataformas final
+			puertas.forEach({ puerta => puerta.puertaDestino(self.puertaCualquierNivel())})
 		}
 	}
 
 	method configurarPuertaFinal() {
-		const puertaFinal =puertas.uniqueElement()
-		const puertaAnteriorNivel = self.puertaAnteriorNivel() // Seteo puerta final con puerta destino para una puerta del penultimo nivel
+		const puertaFinal = puertas.uniqueElement()
+		const puertaAnteriorNivel = self.puertaAnteriorNivel()
 		puertaAnteriorNivel.puertaDestino(puertaFinal)
 		puertaFinal.puertaOrigen(puertaAnteriorNivel)
 	}
 
-	method configurarPuertasDestinoAleatorio() {
+	method configurarPuertasDestino(dificultadDescendiente) {
 		if (not esNivelFinal) {
-			puertas.forEach({ puerta => puerta.puertaDestino(self.puertaCualquierNivel())})
+			self.configurarPuertasDestinoSegunDificultad(dificultadDescendiente)
 		} else {
-			self.configurarPuertaFinal() // Seteo puerta destino a si misma en el nivel de plataformas final
-		}
-	}
-
-	method configurarPuertasDestino(seteoPuertasDestinoDescendiente) {
-		if (seteoPuertasDestinoDescendiente) {
-			self.configurarPuertasDestinoDescendiente()
-		} else {
-			self.configurarPuertasDestinoAleatorio()
+			self.configurarPuertaFinal()
 		}
 	}
 
@@ -85,11 +73,23 @@ class NivelPlataforma {
 		self.construirAntorchas()
 	}
 
+	method agregarHabilidades() {
+		if (not esNivelFinal) {
+			const cantidadHabilidades = (0 .. 2).anyOne()
+			cantidadHabilidades.times({ i => generadorHabilidades.agregarAlTablero(plataformas.anyOne().position().up(1))})
+		}
+	}
+
+	method mostrar(elementos) {
+		elementos.forEach({ elemento => elemento.mostrar()})
+	}
+
 	method agregarAlTablero() {
 		self.construirPlataforma()
-		plataformas.forEach({ plataforma => game.addVisual(plataforma)})
-		puertas.forEach({ puerta => game.addVisual(puerta)})
-		antorchas.forEach({ antorcha => game.addVisual(antorcha)})
+		self.mostrar(plataformas)
+		self.mostrar(puertas)
+		self.mostrar(antorchas)
+		self.agregarHabilidades()
 	}
 
 }
@@ -98,12 +98,14 @@ object nivelPlataformaFactory {
 
 	var position = game.at(0, game.height())
 
-	method positionYSiguiente() {
-		position = position.down(4) // Espacio entre nivel plataformas
+	method espacioEntreNivelesPlataformas(esNivelFinal) = if (esNivelFinal) 4 else 3
+
+	method posicionYSiguiente(esNivelFinal) {
+		position = position.down(self.espacioEntreNivelesPlataformas(esNivelFinal))
 	}
 
 	method construirNivelPlataforma(_nroNivel, _esNivelFinal) {
-		self.positionYSiguiente()
+		self.posicionYSiguiente(_esNivelFinal)
 		return new NivelPlataforma(posicionInicialPlataforma = position, nroNivel = _nroNivel, esNivelFinal = _esNivelFinal)
 	}
 
