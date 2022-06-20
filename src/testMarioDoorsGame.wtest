@@ -1,107 +1,96 @@
-import direcciones.*
+import wollok.game.*
 import personajes.*
 import tablero.*
-import torreDePuertas.*
-import wollok.game.*
+import direcciones.*
 import habilidades.*
+import torreDePuertas.*
 
-/*[Analisis de los TESTS]
- * 		Por ahora los test de izquierda y derecha reaccionan "bien"
- * 		En el caso de test para abajo, tira error ya que este configurada la tecla o no,
- * el personaje se mueve igual. 
-*/
 describe "Movilidad de Mario o Luigi" {
 
-	method clearPantalla() {
+	method initialize() {
 		game.clear()
+		tablero.setearEntorno()
 	}
 
 	test "Spawn" {
-		tablero.setearEntorno()
+		//Posicion inicial de mario
 		assert.equals(mario.position().x(), 0)
-		assert.equals(mario.position().y(), 2)
-		self.clearPantalla()
 	}
-	
-	test "Mario Derecha" {
-		tablero.setearEntorno()
+
+	test "Mario se mueve a la derecha" {
 		mario.mover(derecha)
 		assert.equals(mario.position().x(), 1)
-		assert.equals(mario.position().y(), 2)
-		self.clearPantalla()
 	}
-	
-	test "Mario Izquierda"{
-		tablero.setearEntorno()
-		//Por Spawn el personaje aparece pegado a la izq, primero voy a moverlo
-		//a la derecha 2 veces, verificar posicion y luego moverlo una posicion a la izquierda
+
+	test "Mario se mueve a la izquierda" {
+		// Por Spawn, el personaje aparece a la izquierda del tablero, por lo que se mueve
+		// a la derecha 2 veces, para verificar posicion y luego moverlo una posicion a la izquierda
 		mario.mover(derecha)
 		mario.mover(derecha)
 		assert.equals(mario.position().x(), 2)
-		assert.equals(mario.position().y(), 2)
 		//
 		mario.mover(izquierda)
 		assert.equals(mario.position().x(), 1)
-		assert.equals(mario.position().y(), 2)
-		self.clearPantalla()
 	}
-}
-describe "Luigi tira poderes a Mario"{
-	method clearPantalla() {
-		game.clear()
-	}
-	test "Luigi tira habilidad cambiadorDeTeclas"{
-		tablero.setearEntorno()
-		//Saco a mario de su spawn
-		mario.mover(derecha)
-		mario.mover(derecha)
-		assert.equals(mario.position().x(), 2)
-		assert.equals(mario.position().y(), 2)
-		
-		// aplico habilidad
-		luigi.habilidad(cambiadorDeTeclas)
-		luigi.accionarHabilidad()
-		//mario se mueve para la "izquierda"
-		mario.mover(derecha)
-		mario.mover(derecha)
-		//Verifico que el poder funciona
-		assert.equals(mario.position().x(), 0)
-		assert.equals(mario.position().y(), 2)
-		self.clearPantalla()
-	}
-	//test que falla
-//	test "Luigi tira habilidad freezearAlOponente"{
-//		tablero.setearEntorno()
-//		//Saco a mario de su spawn
-//		mario.mover(derecha)
-//		mario.mover(derecha)
-//		assert.equals(mario.position().x(), 2)
-//		assert.equals(mario.position().y(), 2)
-//		
-//		// aplico habilidad
-//		luigi.habilidad(#{freezearAlOponente})
-//		luigi.accionarHabilidad()
-//		//mario intenta moverse para la derecha
-//		mario.mover(derecha)
-//		mario.mover(derecha)
-//		//Verifico que el poder funciona
-//		assert.equals(mario.position().x(), 2)
-//		assert.equals(mario.position().y(), 2)
-//		self.clearPantalla()
-//	}
-	test "Mario tira habilidad aumentarVelocidad"{
-		tablero.setearEntorno()
-		// aplico habilidad
-		mario.habilidad(aumentarVelocidad)//aumentarVelocidad
-		mario.accionarHabilidad()
-		mario.mover(derecha)
-		//Verifico que el poder funciona
-		assert.equals(mario.position().x(), 2)
-		assert.equals(mario.position().y(), 2)
-		self.clearPantalla()
-	}
-	
-	
+
 }
 
+describe "Luigi tira poderes a Mario" {
+
+	method initialize() {
+		game.clear()
+		tablero.setearEntorno()
+	}
+
+	method agregarHabilidadTablero(habilidad) {
+		if (not game.hasVisual(habilidad)) {
+			habilidad.mostrar()
+		}
+	}
+
+	test "Luigi aplica habilidad cambiadorDeTeclas" {
+		self.agregarHabilidadTablero(cambiadorDeTeclas)
+		// Por Spawn, el personaje aparece a la izquierda del tablero, por lo que se mueve
+		// a la derecha 2 veces, para verificar posicion y luego moverlo una posicion a la izquierda
+		mario.mover(derecha)
+		mario.mover(derecha)
+		assert.equals(mario.position().x(), 2)
+		// Luigi acciona habilidad
+		luigi.habilidad(cambiadorDeTeclas)
+		luigi.accionarHabilidad()
+		// Mario se mueve a la "izquierda"
+		mario.mover(derecha)
+		mario.mover(derecha)
+		// Se verifica que la habilidad funciona
+		assert.equals(mario.position().x(), 0)
+	}
+
+	test "Luigi aplica habilidad freezearAlOponente" {
+		self.agregarHabilidadTablero(freezearAlOponente)
+		// Por Spawn, el personaje aparece a la izquierda del tablero, por lo que se mueve
+		// a la derecha 2 veces, para verificar posicion y luego moverlo una posicion a la izquierda
+		mario.mover(derecha)
+		mario.mover(derecha)
+		assert.equals(mario.position().x(), 2)
+		// Luigi acciona habilidad
+		luigi.habilidad(freezearAlOponente)
+		luigi.accionarHabilidad()
+		// Mario se mueve a la derecha, pero su posicion no debe cambiar
+		mario.mover(derecha)
+		mario.mover(derecha)
+		// Se verifica que la habilidad funciona
+		assert.equals(mario.position().x(), 2)
+	}
+
+	test "Mario aplica habilidad aumentarVelocidad" {
+		self.agregarHabilidadTablero(aumentarVelocidad)
+		// Mario acciona habilidad
+		mario.habilidad(aumentarVelocidad)
+		mario.accionarHabilidad()
+		mario.mover(derecha)
+		// Se verifica que la habilidad funciona
+		assert.equals(mario.position().x(), 2)
+	}
+
+}
 

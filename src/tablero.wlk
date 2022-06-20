@@ -26,7 +26,7 @@ object tablero {
 	method iniciar() {
 		self.setearFondo()
 		self.setearMenuInicial()
-		sonido.iniciar(sonidoDeFondo, true, 100)
+		sonido.iniciar(sonidoDeFondo, true, 0)
 	}
 
 	method configurarTorreDePuertas() {
