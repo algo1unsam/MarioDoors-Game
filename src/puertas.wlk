@@ -55,6 +55,9 @@ class PuertaFinal inherits Puerta(esPuertaFinal = true) {
 
 	var property puertaOrigen = null
 
+	override method trasladar(personaje) {
+	}
+
 	override method entrar(personaje) {
 		super(personaje)
 		game.say(personaje, "¡GANÉ!")

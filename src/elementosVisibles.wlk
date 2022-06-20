@@ -16,7 +16,7 @@ class ElementoVisible {
 
 class ElementoMovible inherits ElementoVisible(position = game.origin()) {
 
-	var direccionMovimiento = frente
+	var property direccionMovimiento = frente
 	var property velocidad = 1
 	var property cambioDireccion = false
 

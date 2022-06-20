@@ -41,7 +41,6 @@ class Personaje inherits ElementoMovible {
 		if (self.noHayHabilidad()) {
 			habilidad = _habilidad
 		}
-		self.moverHabilidad()
 	}
 
 	method moverHabilidad() {

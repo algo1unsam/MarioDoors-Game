@@ -4,11 +4,11 @@ import direcciones.*
 import sonidos.*
 import torreDePuertas.*
 
-class Habilidad inherits ElementoMovible(esHabilidad = true, cambioDireccion = false) {
+class Habilidad inherits ElementoMovible(esHabilidad = true, cambioDireccion = true) {
 
 	const sonidoHabilidad = "sonidoHabilidad.mp3"
 
-	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, true)
+	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, cambioDireccion)
 
 	method mover(direccion, posicionPersonaje) {
 		const posicionSiguiente = self.posicionSiguiente(direccion, posicionPersonaje)
@@ -73,7 +73,7 @@ object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_') {
 
 }
 
-object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = true) {
+object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = false) {
 
 	// Hace la siguiente puerta que entre el personaje lo lleve a la puerta final
 	override method actuar(personaje) {
@@ -101,6 +101,10 @@ object generadorHabilidades {
 			cualquierHabilidad.mostrar()
 			habilidadesEnElTablero.add(cualquierHabilidad)
 		}
+	}
+
+	method limpiarHabilidadesEnElTablero() {
+		habilidadesEnElTablero.clear()
 	}
 
 }

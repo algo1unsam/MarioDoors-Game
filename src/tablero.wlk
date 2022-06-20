@@ -4,10 +4,13 @@ import torreDePuertas.*
 import personajes.*
 import teclado.*
 import sonidos.*
+import habilidades.*
+import direcciones.*
 
 object tablero {
 
 	const sonidoDeFondo = "sonidoDeFondo.mp3"
+	var partidas = 0
 
 	method setearFondo() {
 		game.title("Mario Doors Game")
@@ -41,27 +44,50 @@ object tablero {
 	}
 
 	method configurarPersonajes() {
-		mario.mostrar()
-		self.setearColisiones(mario)
-		luigi.mostrar()
-		self.setearColisiones(luigi)
+//		mario.velocidad(1)
+//		luigi.velocidad(1)
+//		mario.mostrar()
+//		self.setearColisiones(mario)
+//		luigi.mostrar()
+//		self.setearColisiones(luigi)
+		if (partidas > 0) {
+			game.removeVisual(mario)
+			game.removeVisual(luigi)
+//			mario.position(game.at(0, game.height() - 2))
+//			luigi.position(game.at(game.width() - 1, game.height() - 2))
+			mario.image("mario_")
+			luigi.image("luigi_")
+			mario.direccionMovimiento(derecha)
+			luigi.direccionMovimiento(izquierda)
+			mario.position(game.at(0, 0))
+			luigi.position(game.at(0, 0))
+		}
+		game.addVisual(mario)
+		game.addVisual(luigi)
+		if (game.hasVisual(mario)) {
+			game.say(mario, "Estoy en el tablero")
+		}
 	}
 
 	method setearEntorno() {
 		game.clear()
+		generadorHabilidades.limpiarHabilidadesEnElTablero()
 		self.configurarTorreDePuertas()
 		self.configurarPersonajes()
 		teclado.configurarTeclasPersonajes()
 	}
-	
-	method pausarPersonajes(){
+
+	method pausarPersonajes() {
 		mario.velocidad(0)
 		luigi.velocidad(0)
 	}
 
 	method finalizarPartida() {
-		self.pausarPersonajes()
-		game.schedule(1000, { menuFinal.iniciar()})
+//		self.pausarPersonajes()
+		partidas += 1
+		game.schedule(1000, { game.clear()
+		; menuFinal.iniciar()
+		})
 	}
 
 }
