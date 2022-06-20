@@ -10,12 +10,6 @@ object torreDePuertas {
 
 	method puertaQueLlevaPuertaFinal() = self.puertaFinal().puertaOrigen()
 
-	method nivelPlataforma(nroNivel) {
-		return nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel })
-	}
-
-	method plataformasPorNivelPlataforma(nroNivel) = self.nivelPlataforma(nroNivel).plataformas()
-
 	method anteriorNivelPlataforma(_nivelPlataforma) {
 		const nroNivel = _nivelPlataforma.nroNivel()
 		return nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel - 1 })

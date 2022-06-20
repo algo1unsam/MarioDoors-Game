@@ -4,11 +4,11 @@ import direcciones.*
 import sonidos.*
 import torreDePuertas.*
 
-class Habilidad inherits ElementoMovible {
+class Habilidad inherits ElementoMovible(esHabilidad = true, cambioDireccion = false) {
 
 	const sonidoHabilidad = "sonidoHabilidad.mp3"
 
-	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, cambioDireccion)
+	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, true)
 
 	method mover(direccion, posicionPersonaje) {
 		const posicionSiguiente = self.posicionSiguiente(direccion, posicionPersonaje)
@@ -38,7 +38,7 @@ object aumentarVelocidad inherits Habilidad(image = 'item_rojo_') {
 
 }
 
-object cambiadorDeTeclas inherits Habilidad(image = 'item_azul_', sonidoHabilidad = "sonidoMichaelJacksonJijiii.mp3") {
+object cambiadorDeTeclas inherits Habilidad(image = 'item_azul_') {
 
 	// Cambia de direccion de las teclas del oponente por x segundos
 	override method actuar(personaje) {
@@ -64,7 +64,7 @@ object freezearAlOponente inherits Habilidad(image = 'item_violeta_') {
 
 }
 
-object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_', sonidoHabilidad = "sonidoAyudaPuertaFinal.mp3") {
+object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_') {
 
 	// Cambia color de la puerta que lleva a la puerta final
 	override method actuar(personaje) {
@@ -73,7 +73,7 @@ object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_', sonidoHabilida
 
 }
 
-object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = false) {
+object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = true) {
 
 	// Hace la siguiente puerta que entre el personaje lo lleve a la puerta final
 	override method actuar(personaje) {

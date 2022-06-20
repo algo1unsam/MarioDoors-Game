@@ -60,7 +60,7 @@ describe "Luigi tira poderes a Mario"{
 		assert.equals(mario.position().y(), 2)
 		
 		// aplico habilidad
-		luigi.habilidades(#{cambiadorDeTeclas})
+		luigi.habilidad(cambiadorDeTeclas)
 		luigi.accionarHabilidad()
 		//mario se mueve para la "izquierda"
 		mario.mover(derecha)
@@ -93,7 +93,7 @@ describe "Luigi tira poderes a Mario"{
 	test "Mario tira habilidad aumentarVelocidad"{
 		tablero.setearEntorno()
 		// aplico habilidad
-		mario.habilidades(#{aumentarVelocidad})//aumentarVelocidad
+		mario.habilidad(aumentarVelocidad)//aumentarVelocidad
 		mario.accionarHabilidad()
 		mario.mover(derecha)
 		//Verifico que el poder funciona

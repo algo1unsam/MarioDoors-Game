@@ -6,7 +6,7 @@ import teclado.*
 import sonidos.*
 
 object tablero {
-	
+
 	const sonidoDeFondo = "sonidoDeFondo.mp3"
 
 	method setearFondo() {
@@ -16,30 +16,38 @@ object tablero {
 		game.height(16)
 		game.ground("fondo_negro.png")
 	}
-	method agregarTorreDePuertas() {
+
+	method configurarTorreDePuertas() {
 		torreDePuertas.agregarAlTablero()
 	}
 
-	method agregarPersonajes() {
-		game.addVisual(mario)
-		mario.mostrarHabilidad()
-		game.addVisual(luigi)
-		luigi.mostrarHabilidad()
+	method setearColisiones(personaje) {
+		game.onCollideDo(personaje, { algo =>
+			if (algo.esHabilidad()) {
+				personaje.agarrar(algo)
+			}
+		})
+	}
+
+	method configurarPersonajes() {
+		mario.mostrar()
+		self.setearColisiones(mario)
+		luigi.mostrar()
+		self.setearColisiones(luigi)
 	}
 
 	method setearEntorno() {
 		game.clear()
-		self.agregarTorreDePuertas()
-		self.agregarPersonajes()
+		self.configurarTorreDePuertas()
+		self.configurarPersonajes()
 		teclado.configurarTeclasPersonajes()
 	}
 
 	method iniciar() {
 		self.setearFondo()
 		menuInicial.iniciar()
-		sonido.iniciar(sonidoDeFondo,true,100)
+		sonido.iniciar(sonidoDeFondo, true, 100)
 	}
-	
 
 }
 

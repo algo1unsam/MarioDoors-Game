@@ -8,21 +8,10 @@ import sonidos.*
 
 class Personaje inherits ElementoMovible {
 
-//	position = self.posicionInicial()
 	const property oponente = null
-	var property habilidades = []
+	var property habilidad = null
 
-	method nivelPlataformaInicial() = torreDePuertas.plataformasPorNivelPlataforma(1)
-	
-	method plataformaInicial() = self.nivelPlataformaInicial().anyOne()
-
-	method posicionInicial() = self.plataformaInicial().position().up(1)
-
-//	method validarPosicion(posicionSiguiente) {
-//		mundo.validarPosicion(posicionSiguiente, self)
-//	}
 	override method mover(direccion) {
-//		self.validarPosicionSiguiente(direccion)
 		super(direccion)
 		self.moverHabilidad()
 	}
@@ -47,53 +36,41 @@ class Personaje inherits ElementoMovible {
 		self.salirPuerta()
 	}
 
-	method noHayHabilidades() = habilidades.isEmpty()
+	method noHayHabilidad() = habilidad == null
 
-	method primeraHabilidad() = habilidades.first()
-
-	method agarrar(habilidad) {
-		habilidades.add(habilidad)
+	method agarrar(_habilidad) {
+		if (self.noHayHabilidad()) {
+			habilidad = _habilidad
+		}
 		self.moverHabilidad()
 	}
 
-	method mostrarHabilidad() {
-		if (not self.noHayHabilidades()) {
-			self.primeraHabilidad().mostrar()
-		}
-	}
-
 	method moverHabilidad() {
-		if (not self.noHayHabilidades()) {
-			self.primeraHabilidad().mover(direccionMovimiento, position)
+		if (not self.noHayHabilidad()) {
+			habilidad.mover(direccionMovimiento, position)
 		}
 	}
 
-	method limpiarHabilidad(habilidadAccionada) {
-		game.removeVisual(habilidadAccionada)
-		habilidades.remove(habilidadAccionada)
-		self.mostrarHabilidad()
+	method limpiarHabilidad() {
+		habilidad.remover()
+		habilidad = null
 	}
 
 	method accionarHabilidad() {
-		if (self.noHayHabilidades()) {
+		if (self.noHayHabilidad()) {
 			self.error('No hay habilitad para usar')
 		}
-		const habilidadAccionada = self.primeraHabilidad()
-		habilidadAccionada.actuar(self)
-		self.limpiarHabilidad(habilidadAccionada)
+		habilidad.actuar(self)
+		self.limpiarHabilidad()
 	}
 
 }
 
 object mario inherits Personaje(image = "mario_", direccionMovimiento = derecha, oponente = luigi, position = game.at(0, game.height() - 2)) {
 
-	override method plataformaInicial() = self.nivelPlataformaInicial().first()
-
 }
 
 object luigi inherits Personaje(image = "luigi_", direccionMovimiento = izquierda, oponente = mario, position = game.at(game.width() - 1, game.height() - 2)) {
-
-	override method plataformaInicial() = self.nivelPlataformaInicial().last()
 
 }
 

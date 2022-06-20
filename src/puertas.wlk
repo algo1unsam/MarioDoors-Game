@@ -2,10 +2,8 @@ import wollok.game.*
 import elementosVisibles.*
 import sonidos.*
 
-class Puerta inherits ElementoVisible(image = 'puerta') {
+class Puerta inherits ElementoVisible(image = 'puerta', esPuerta = true) {
 
-	//const imagenPuerta = 'puerta'
-	const property esPuerta = true
 	const property esPuertaFinal = false
 	var property estaAbierta = false
 	var property estaIluminada = false
@@ -52,7 +50,7 @@ class Puerta inherits ElementoVisible(image = 'puerta') {
 
 }
 
-class PuertaFinal inherits Puerta(image = 'puerta', esPuertaFinal = true) {
+class PuertaFinal inherits Puerta(esPuertaFinal = true) {
 
 	var property puertaOrigen = null
 
