@@ -1,6 +1,7 @@
 import wollok.game.*
 import elementosVisibles.*
 import sonidos.*
+import tablero.*
 
 class Puerta inherits ElementoVisible(image = 'puerta', esPuerta = true) {
 
@@ -57,6 +58,7 @@ class PuertaFinal inherits Puerta(esPuertaFinal = true) {
 	override method entrar(personaje) {
 		super(personaje)
 		game.say(personaje, "¡GANÉ!")
+		tablero.finalizarPartida()
 	}
 
 }

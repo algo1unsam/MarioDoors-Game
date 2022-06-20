@@ -2,7 +2,6 @@ import direcciones.*
 import personajes.*
 import tablero.*
 import torreDePuertas.*
-import validaciones.*
 import wollok.game.*
 import habilidades.*
 

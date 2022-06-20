@@ -1,5 +1,5 @@
 import wollok.game.*
-import menuInicial.*
+import menus.*
 import torreDePuertas.*
 import personajes.*
 import teclado.*
@@ -15,6 +15,17 @@ object tablero {
 		game.width(15)
 		game.height(16)
 		game.ground("fondo_negro.png")
+	}
+
+	method setearMenuInicial() {
+		game.clear()
+		menuInicial.iniciar()
+	}
+
+	method iniciar() {
+		self.setearFondo()
+		self.setearMenuInicial()
+		sonido.iniciar(sonidoDeFondo, true, 100)
 	}
 
 	method configurarTorreDePuertas() {
@@ -42,11 +53,15 @@ object tablero {
 		self.configurarPersonajes()
 		teclado.configurarTeclasPersonajes()
 	}
+	
+	method pausarPersonajes(){
+		mario.velocidad(0)
+		luigi.velocidad(0)
+	}
 
-	method iniciar() {
-		self.setearFondo()
-		menuInicial.iniciar()
-		sonido.iniciar(sonidoDeFondo, true, 100)
+	method finalizarPartida() {
+		self.pausarPersonajes()
+		game.schedule(1000, { menuFinal.iniciar()})
 	}
 
 }

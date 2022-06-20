@@ -2,7 +2,6 @@ import wollok.game.*
 import elementosVisibles.*
 import torreDePuertas.*
 import direcciones.*
-import validaciones.*
 import habilidades.*
 import sonidos.*
 
