@@ -41,7 +41,7 @@ class NivelPlataforma {
 		const puertaAnteriorNivel = self.puertaAnteriorNivel()
 		puertaAnteriorNivel.puertaDestino(puertaFinal)
 		puertaFinal.puertaOrigen(puertaAnteriorNivel)
-		//puertaFinal.puertaDestino(puertaFinal)
+	// puertaFinal.puertaDestino(puertaFinal)
 	}
 
 	method configurarPuertasDestino(dificultadDescendiente) {
@@ -97,7 +97,12 @@ class NivelPlataforma {
 
 object nivelPlataformaFactory {
 
-	var position = game.at(0, game.height())
+	const posicionInicial = game.at(0, game.height())
+	var property position
+
+	method seteoInicial() {
+		position = posicionInicial
+	}
 
 	method espacioEntreNivelesPlataformas(esNivelFinal) = if (esNivelFinal) 4 else 3
 

@@ -9,6 +9,15 @@ class Personaje inherits ElementoMovible {
 
 	const property oponente = null
 	var property habilidad = null
+	const posicionInicial
+	const direccionMovimientoInicial
+
+	method seteoInicial() {
+		position = posicionInicial
+		velocidad = 1
+		direccionMovimiento = direccionMovimientoInicial
+		habilidad = null
+	}
 
 	override method mover(direccion) {
 		super(direccion)
@@ -64,11 +73,11 @@ class Personaje inherits ElementoMovible {
 
 }
 
-object mario inherits Personaje(image = "mario_", direccionMovimiento = derecha, oponente = luigi, position = game.at(0, game.height() - 2)) {
+object mario inherits Personaje(image = "mario_", direccionMovimientoInicial = derecha, oponente = luigi, posicionInicial = game.at(0, 14)) {
 
 }
 
-object luigi inherits Personaje(image = "luigi_", direccionMovimiento = izquierda, oponente = mario, position = game.at(game.width() - 1, game.height() - 2)) {
+object luigi inherits Personaje(image = "luigi_", direccionMovimientoInicial = izquierda, oponente = mario, posicionInicial = game.at(14, 14)) {
 
 }
 

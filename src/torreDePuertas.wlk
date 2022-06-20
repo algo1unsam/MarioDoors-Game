@@ -1,4 +1,5 @@
 import nivelesPlataformas.*
+import habilidades.*
 
 object torreDePuertas {
 
@@ -36,7 +37,14 @@ object torreDePuertas {
 		self.agregarNivelPlataforma(cantidadNiveles + 1, esNivelFinal)
 	}
 
+	method limpiarNivelesPlataformas() {
+		nivelesPlataformas.clear()
+		nivelPlataformaFactory.seteoInicial()
+	}
+
 	method agregarAlTablero() {
+		generadorHabilidades.limpiarHabilidadesEnElTablero()
+		self.limpiarNivelesPlataformas()
 		self.construirTorreDePuertas()
 		nivelesPlataformas.forEach({ nivelPlataforma => nivelPlataforma.agregarAlTablero()})
 		nivelesPlataformas.forEach({ nivelPlataforma => nivelPlataforma.configurarPuertasDestino(dificultadDescendiente)})
