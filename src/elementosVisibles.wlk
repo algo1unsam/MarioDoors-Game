@@ -14,11 +14,13 @@ class ElementoVisible {
 
 }
 
-class ElementoMovible inherits ElementoVisible(position = game.origin()) {
+class ElementoMovible inherits ElementoVisible(position = game.origin()){
 
 	var property direccionMovimiento = frente
 	var property velocidad = 1
 	var property cambioDireccion = false
+	
+	method seteoInicial()
 
 	override method image() = image + self.imageDireccion() + ".png"
 

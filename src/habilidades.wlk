@@ -7,6 +7,11 @@ import torreDePuertas.*
 class Habilidad inherits ElementoMovible(esHabilidad = true, cambioDireccion = true) {
 
 	const sonidoHabilidad = "sonidoHabilidad.mp3"
+	const direccionMovimientoInicial = frente
+
+	override method seteoInicial() {
+		direccionMovimiento = direccionMovimientoInicial
+	}
 
 	method posicionSiguiente(direccion, posicionPersonaje) = direccion.siguiente(posicionPersonaje, velocidad, cambioDireccion)
 
@@ -105,6 +110,11 @@ object generadorHabilidades {
 
 	method limpiarHabilidadesEnElTablero() {
 		habilidadesEnElTablero.clear()
+	}
+
+	method seteoInicial() {
+		self.limpiarHabilidadesEnElTablero()
+		habilidades.forEach({ habilidad => habilidad.seteoInicial()})
 	}
 
 }

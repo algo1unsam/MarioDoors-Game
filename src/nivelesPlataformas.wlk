@@ -41,7 +41,6 @@ class NivelPlataforma {
 		const puertaAnteriorNivel = self.puertaAnteriorNivel()
 		puertaAnteriorNivel.puertaDestino(puertaFinal)
 		puertaFinal.puertaOrigen(puertaAnteriorNivel)
-	// puertaFinal.puertaDestino(puertaFinal)
 	}
 
 	method configurarPuertasDestino(dificultadDescendiente) {
@@ -90,7 +89,6 @@ class NivelPlataforma {
 		self.mostrar(plataformas)
 		self.mostrar(puertas)
 		self.mostrar(antorchas)
-		self.agregarHabilidades()
 	}
 
 }

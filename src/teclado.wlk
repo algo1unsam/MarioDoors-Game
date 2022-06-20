@@ -8,7 +8,7 @@ import direcciones.*
 object teclado {
 
 	method configurarTeclasMenuInicial() {
-		// Tecla Inicio Juego
+			// Tecla Inicio Juego
 		keyboard.space().onPressDo({ tablero.setearEntorno()})
 			// Teclas Dificultades
 		keyboard.num1().onPressDo({ menuInicial.seleccionar(dificultadUno)})
@@ -16,12 +16,12 @@ object teclado {
 	}
 
 	method configurarTeclasMenuFinal() {
-		// Tecla Menu Inicial
-		keyboard.enter().onPressDo({ tablero.setearMenuInicial()})
+			// Tecla Menu Inicial
+		keyboard.space().onPressDo({ tablero.setearMenuInicial()})
 	}
 
 	method configurarTeclasPersonajes() {
-		// Teclas Izquierda
+			// Teclas Izquierda
 		keyboard.a().onPressDo{ mario.mover(izquierda)}
 		keyboard.left().onPressDo{ luigi.mover(izquierda)}
 			// Teclas Derecha

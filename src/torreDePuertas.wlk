@@ -18,7 +18,7 @@ object torreDePuertas {
 
 	method siguienteNivelPlataforma(_nivelPlataforma) {
 		const nroNivel = _nivelPlataforma.nroNivel()
-		return nivelesPlataformas.findOrDefault({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel + 1 }, _nivelPlataforma) // Seteo puerta destino a en el siguiente nivel de plataformas o en el mismo nivel si es nivel final
+		return nivelesPlataformas.find({ nivelPlataforma => nivelPlataforma.nroNivel() == nroNivel + 1 }) // Seteo puerta destino a en el siguiente nivel de plataformas
 	}
 
 	method cualquierNivelPlataforma(_nivelPlataforma) {
@@ -43,11 +43,12 @@ object torreDePuertas {
 	}
 
 	method agregarAlTablero() {
-		generadorHabilidades.limpiarHabilidadesEnElTablero()
+		generadorHabilidades.seteoInicial()
 		self.limpiarNivelesPlataformas()
 		self.construirTorreDePuertas()
 		nivelesPlataformas.forEach({ nivelPlataforma => nivelPlataforma.agregarAlTablero()})
 		nivelesPlataformas.forEach({ nivelPlataforma => nivelPlataforma.configurarPuertasDestino(dificultadDescendiente)})
+		nivelesPlataformas.forEach({ nivelPlataforma => nivelPlataforma.agregarHabilidades()})
 	}
 
 }

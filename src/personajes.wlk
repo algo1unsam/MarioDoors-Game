@@ -12,7 +12,7 @@ class Personaje inherits ElementoMovible {
 	const posicionInicial
 	const direccionMovimientoInicial
 
-	method seteoInicial() {
+	override method seteoInicial() {
 		position = posicionInicial
 		velocidad = 1
 		direccionMovimiento = direccionMovimientoInicial
