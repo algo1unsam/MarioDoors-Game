@@ -33,7 +33,6 @@ class Habilidad inherits ElementoMovible(esHabilidad = true, cambioDireccion = t
 
 object aumentarVelocidad inherits Habilidad(image = 'item_rojo_') {
 
-	// Hace que vaya mas rapido el personaje
 	override method actuar(personaje) {
 		super(personaje)
 		personaje.velocidad(2)
@@ -45,7 +44,6 @@ object aumentarVelocidad inherits Habilidad(image = 'item_rojo_') {
 
 object cambiadorDeTeclas inherits Habilidad(image = 'item_azul_') {
 
-	// Cambia de direccion de las teclas del oponente por x segundos
 	override method actuar(personaje) {
 		super(personaje)
 		const oponente = personaje.oponente()
@@ -58,7 +56,6 @@ object cambiadorDeTeclas inherits Habilidad(image = 'item_azul_') {
 
 object freezearAlOponente inherits Habilidad(image = 'item_violeta_') {
 
-	// Hace que el oponente se detenga por x segundos
 	override method actuar(personaje) {
 		super(personaje)
 		const oponente = personaje.oponente()
@@ -71,7 +68,6 @@ object freezearAlOponente inherits Habilidad(image = 'item_violeta_') {
 
 object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_') {
 
-	// Cambia color de la puerta que lleva a la puerta final
 	override method actuar(personaje) {
 		torreDePuertas.puertaQueLlevaPuertaFinal().iluminar()
 	}
@@ -80,7 +76,6 @@ object ayudaPuertaFinal inherits Habilidad(image = 'item_verde_') {
 
 object llavePuertaFinal inherits Habilidad(image = 'llave_', cambioDireccion = false) {
 
-	// Hace la siguiente puerta que entre el personaje lo lleve a la puerta final
 	override method actuar(personaje) {
 		const puertaMismaPosicion = personaje.puertaMismaPosicion()
 		const puertaFinal = torreDePuertas.puertaFinal()

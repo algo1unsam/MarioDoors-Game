@@ -18,6 +18,7 @@ object teclado {
 	method configurarTeclasMenuFinal() {
 			// Tecla Menu Inicial
 		keyboard.space().onPressDo({ tablero.setearMenuInicial()})
+		keyboard.alt().onPressDo({ tablero.finalizarJuego()})
 	}
 
 	method configurarTeclasPersonajes() {

@@ -65,6 +65,10 @@ object tablero {
 		self.pausarPersonajes()
 		game.schedule(1000, { menuFinal.iniciar()})
 	}
+	
+	method finalizarJuego(){
+		game.stop()
+	}
 
 }
 
