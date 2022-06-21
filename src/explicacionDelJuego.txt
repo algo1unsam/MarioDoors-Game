@@ -8,12 +8,12 @@ Dificultad 1: El personaje de desplaza entre nivel de manera descendiente
 Dificultad 2: El personaje de desplaza entre nivel de manera aleatoria
 
 MENU INICIAL
--Se puede iniciar una nueva partida
--Se puede seleccionar dificultad de la partida
+-Se puede iniciar una nueva partida (tecla: space)
+-Se puede seleccionar dificultad de la partida (teclas: num1, num2)
 
 MENU FINAL
--Se puede reiniciar una nueva partida
--Se puede salir del juego
+-Se puede reiniciar una nueva partida (tecla: space)
+-Se puede salir del juego (tecla: alt)
 
 NIVELES DE PUERTAS
 Se construyen a partir de colecciones de puertas, conociendo la dificultad de la partida, el personaje va del nivel superior al inferior de manera descendiente o aleatoriamente
