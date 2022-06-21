@@ -18,8 +18,12 @@ object tablero {
 		game.ground("fondo_negro.png")
 	}
 
-	method setearMenuInicial() {
+	method limpiarTablero() {
 		game.clear()
+	}
+
+	method setearMenuInicial() {
+		self.limpiarTablero()
 		menuInicial.iniciar()
 	}
 
@@ -27,6 +31,11 @@ object tablero {
 		self.setearFondo()
 		self.setearMenuInicial()
 		sonido.iniciar(sonidoDeFondo, true, 0)
+	}
+
+	method setearMenuInstruccionesTeclas() {
+		self.limpiarTablero()
+		menuInstruccionesTeclas.iniciar()
 	}
 
 	method configurarTorreDePuertas() {
@@ -51,7 +60,7 @@ object tablero {
 	}
 
 	method setearEntorno() {
-		game.clear()
+		self.limpiarTablero()
 		self.configurarTorreDePuertas()
 		self.configurarPersonajes()
 		teclado.configurarTeclasPersonajes()
@@ -65,8 +74,8 @@ object tablero {
 		self.pausarPersonajes()
 		game.schedule(1000, { menuFinal.iniciar()})
 	}
-	
-	method finalizarJuego(){
+
+	method finalizarJuego() {
 		game.stop()
 	}
 

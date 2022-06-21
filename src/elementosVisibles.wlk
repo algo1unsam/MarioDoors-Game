@@ -8,18 +8,22 @@ class ElementoVisible {
 	const property esPuerta = false
 	const property esHabilidad = false
 
-	method mostrar() = game.addVisual(self)
+	method mostrar() {
+		game.addVisual(self)
+	}
 
-	method remover() = game.removeVisual(self)
+	method remover() {
+		game.removeVisual(self)
+	}
 
 }
 
-class ElementoMovible inherits ElementoVisible(position = game.origin()){
+class ElementoMovible inherits ElementoVisible(position = game.origin()) {
 
 	var property direccionMovimiento = frente
 	var property velocidad = 1
 	var property cambioDireccion = false
-	
+
 	method seteoInicial()
 
 	override method image() = image + self.imageDireccion() + ".png"

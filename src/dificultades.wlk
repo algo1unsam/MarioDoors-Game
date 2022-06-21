@@ -18,7 +18,7 @@ class Dificultad inherits ElementoVisible {
 
 }
 
-object dificultadUno inherits Dificultad(image = "dificultad_uno", imageSeleccionada = "_seleccionada", position = start.position().down(2), dificultadDescendiente = true) {
+object dificultadUno inherits Dificultad(image = "dificultad_uno", imageSeleccionada = "_seleccionada", position = title.position().down(5), dificultadDescendiente = true) {
 
 }
 

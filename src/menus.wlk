@@ -8,7 +8,11 @@ object title inherits ElementoVisible(image = "mario_doors_game.png", position =
 
 }
 
-object start inherits ElementoVisible(image = "start.png", position = title.position().down(5)) {
+object start inherits ElementoVisible(image = "start.png", position = dificultadDos.position().down(2)) {
+
+}
+
+object keys inherits ElementoVisible(image = "keys.png", position = game.at(0, game.height()).down(8)) {
 
 }
 
@@ -53,6 +57,20 @@ object menuInicial inherits Menu {
 		dificultades.forEach({ dificultad => dificultad.deseleccionar()})
 		dificultadSeleccionada.seleccionar()
 		torreDePuertas.dificultadDescendiente(dificultadSeleccionada.dificultadDescendiente())
+	}
+
+}
+
+object menuInstruccionesTeclas inherits Menu {
+
+	override method agregarOpciones() {
+		keys.mostrar()
+		start.mostrar()
+	}
+
+	override method iniciar() {
+		super()
+		teclado.configurarTeclaContinuar()
 	}
 
 }
