@@ -26,7 +26,8 @@ Se juegan con 2 personajes, los cuales pueden:
 -Aplicar habilidad (teclas: e, ctrl)
 
 HABILIDADES
-Son items que le dan ventaja al personaje que hace uso de ellos
+Son items que le dan ventaja al personaje que hace uso de ellos.
+El personaje los toma, al pasar por la misma posicion en donde se encuentren, y si no tiene otra habilidad previa sin usar
 Pueden aplicarse sobre el mismo personaje, sobre su oponente, o ser una ayuda para llegar a la puerta final
 -AumentarVelocidad: Cambia la velocidad del personaje por x segundos
 -CambiadorDeTeclas: Cambia la direccion de las teclas del oponente por x segundos
