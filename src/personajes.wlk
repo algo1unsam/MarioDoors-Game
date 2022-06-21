@@ -59,8 +59,10 @@ class Personaje inherits ElementoMovible {
 	}
 
 	method limpiarHabilidad() {
-		habilidad.remover()
-		habilidad = null
+		if (not self.noHayHabilidad()) {
+			habilidad.remover()
+			habilidad = null
+		}
 	}
 
 	method accionarHabilidad() {
@@ -68,6 +70,11 @@ class Personaje inherits ElementoMovible {
 			self.error('No hay habilitad para usar')
 		}
 		habilidad.actuar(self)
+		self.limpiarHabilidad()
+	}
+	
+	method pausar(){
+		velocidad = 0
 		self.limpiarHabilidad()
 	}
 

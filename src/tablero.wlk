@@ -67,7 +67,7 @@ object tablero {
 	}
 
 	method pausarPersonajes() {
-		personajes.forEach({ personaje => personaje.velocidad(0)})
+		personajes.forEach({ personaje => personaje.pausar()})
 	}
 
 	method finalizarPartida() {
