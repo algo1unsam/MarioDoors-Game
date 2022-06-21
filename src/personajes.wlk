@@ -17,6 +17,7 @@ class Personaje inherits ElementoMovible {
 		velocidad = 1
 		direccionMovimiento = direccionMovimientoInicial
 		habilidad = null
+		cambioDireccion = false
 	}
 
 	override method mover(direccion) {
