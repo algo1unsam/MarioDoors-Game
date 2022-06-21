@@ -1,11 +1,11 @@
 CONCEPTO DEL JUEGO
 Los personajes empiezan en el nivel mas alto de la torre, donde cada nivel tiene una serie de puertas
-El personaje al entrar en una de estas puertas, aparece en otra puerta (en el mismo nivel donde esta o en otro nivel de puertas)
-El objetivo del juego es ser el personaje que llegue primero a la puerta final, es decir, la que se encuentra en el ultimo nivel inferior
+El personaje al entrar en una de estas puertas, aparece en otra (en el mismo nivel donde esta o en otro nivel de puertas)
+El objetivo del jugador es llegar primero a la puerta final, la cual se encuentra en el nivel mas inferior
 
 DIFICULTAD PARTIDAS
-Dificultad 1: El personaje de desplaza entre nivel de manera descendiente
-Dificultad 2: El personaje de desplaza entre nivel de manera aleatoria
+Dificultad 1: El personaje de desplaza entre niveles de manera descendiente
+Dificultad 2: El personaje de desplaza entre niveles de manera aleatoria
 
 MENU INICIAL
 -Se puede iniciar una nueva partida (tecla: space)
@@ -14,10 +14,6 @@ MENU INICIAL
 MENU FINAL
 -Se puede reiniciar una nueva partida (tecla: space)
 -Se puede salir del juego (tecla: alt)
-
-NIVELES DE PUERTAS
-Se construyen a partir de colecciones de puertas, conociendo la dificultad de la partida, el personaje va del nivel superior al inferior de manera descendiente o aleatoriamente
-La aparacion de habilidades se hace de manera aleatoria en cualquier nievel de la torre, menos el ultimo nivel inferior
 
 PERSONAJES
 Se juegan con 2 personajes, los cuales pueden:
