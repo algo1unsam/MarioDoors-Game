@@ -20,12 +20,14 @@ object gameOver inherits ElementoVisible(image = "game_over.png", position = gam
 
 }
 
-object restart inherits ElementoVisible(image = "restart.png", position = gameOver.position().down(5)) {
+object restart inherits ElementoVisible(image = "restart.png", position = gameOver.position().down(8)) {
 
 }
 
-object exit inherits ElementoVisible(image = "exit.png", position = restart.position().down(1)) {
+object exit inherits ElementoVisible(image = "exit.png", position = start.position().down(1)) {
 
+	const property positionInicial = start.position().down(1)
+	const property positionFinal = restart.position().down(1)
 }
 
 class Menu {
@@ -44,8 +46,10 @@ object menuInicial inherits Menu {
 
 	override method agregarOpciones() {
 		title.mostrar()
-		start.mostrar()
 		dificultades.forEach({ dificultad => dificultad.mostrar()})
+		start.mostrar()
+//		exit.position(exit.positionInicial())
+		exit.mostrar()
 	}
 
 	override method iniciar() {
@@ -80,6 +84,7 @@ object menuFinal inherits Menu {
 	override method agregarOpciones() {
 		gameOver.mostrar()
 		restart.mostrar()
+//		exit.position(exit.positionFinal())
 		exit.mostrar()
 	}
 

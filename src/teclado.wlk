@@ -13,6 +13,8 @@ object teclado {
 		// Teclas Dificultades
 		keyboard.num1().onPressDo({ menuInicial.seleccionar(dificultadUno)})
 		keyboard.num2().onPressDo({ menuInicial.seleccionar(dificultadDos)})
+		// Tecla Finalizar Juego
+		keyboard.alt().onPressDo({ tablero.finalizarJuego()})
 	}
 
 	method configurarTeclaContinuar() {
@@ -23,6 +25,7 @@ object teclado {
 	method configurarTeclasMenuFinal() {
 		// Tecla Menu Inicial
 		keyboard.space().onPressDo({ tablero.setearMenuInicial()})
+		// Tecla Finalizar Juego
 		keyboard.alt().onPressDo({ tablero.finalizarJuego()})
 	}
 

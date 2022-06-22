@@ -59,22 +59,32 @@ class Personaje inherits ElementoMovible {
 		}
 	}
 
+	method removerHabilidadEnElTablero() {
+		if (game.hasVisual(habilidad)) {
+			habilidad.remover()
+		}
+	}
+
 	method limpiarHabilidad() {
 		if (not self.noHayHabilidad()) {
-			habilidad.remover()
+			self.removerHabilidadEnElTablero()
 			habilidad = null
 		}
 	}
 
-	method accionarHabilidad() {
+	method validarAccionarHabilidad() {
 		if (self.noHayHabilidad()) {
-			self.error('No hay habilitad para usar')
+			self.error('No hay habilidad para usar')
 		}
+	}
+
+	method accionarHabilidad() {
+		self.validarAccionarHabilidad()
 		habilidad.actuar(self)
 		self.limpiarHabilidad()
 	}
-	
-	method pausar(){
+
+	method pausar() {
 		velocidad = 0
 		self.limpiarHabilidad()
 	}

@@ -30,10 +30,10 @@ class NivelPlataforma {
 	method configurarPuertasDestinoSegunDificultad(dificultadDescendiente) {
 		if (dificultadDescendiente) {
 			puertas.forEach({ puerta => puerta.puertaDestino(puertas.anyOne())}) // Seteo puertas destino en mismo nivel de plataformas
-			self.configurarPuertaDestinoSiguienteNivel() // Seteo de una puerta destino al siguiente nivel de plataformas
 		} else {
 			puertas.forEach({ puerta => puerta.puertaDestino(self.puertaCualquierNivel())})
 		}
+		self.configurarPuertaDestinoSiguienteNivel() // Seteo de una puerta destino al siguiente nivel de plataformas (para ambas dificultades, asi al menos 1 puerta va a cada nivel de plataforma)
 	}
 
 	method configurarPuertaFinal() {
