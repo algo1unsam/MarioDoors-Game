@@ -26,8 +26,6 @@ object restart inherits ElementoVisible(image = "restart.png", position = gameOv
 
 object exit inherits ElementoVisible(image = "exit.png", position = start.position().down(1)) {
 
-	const property positionInicial = start.position().down(1)
-	const property positionFinal = restart.position().down(1)
 }
 
 class Menu {
@@ -48,7 +46,6 @@ object menuInicial inherits Menu {
 		title.mostrar()
 		dificultades.forEach({ dificultad => dificultad.mostrar()})
 		start.mostrar()
-//		exit.position(exit.positionInicial())
 		exit.mostrar()
 	}
 
@@ -84,7 +81,6 @@ object menuFinal inherits Menu {
 	override method agregarOpciones() {
 		gameOver.mostrar()
 		restart.mostrar()
-//		exit.position(exit.positionFinal())
 		exit.mostrar()
 	}
 
